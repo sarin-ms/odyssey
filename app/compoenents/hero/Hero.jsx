@@ -8,7 +8,6 @@ import heroBg from "@/public/assets/odyssey_hero.png";
 export default function Hero() {
   return (
     <>
-      {/* Fixed hero that stays behind everything */}
       <div className={styles.heroWrapper}>
         <section className={styles.heroSection} id="hero">
           <div className={styles.heroBg}>
@@ -27,12 +26,12 @@ export default function Hero() {
               <p
                 className={`${styles.heroSubtitle} ${styles.animFadeUp} ${styles.animDelay1}`}
               >
-                μLEARN CHN × IEDC BOOTCAMP CEC
+                 IEDC BOOTCAMP CEC × μLEARN CHN
               </p>
               <h1
                 className={`${styles.heroTitle} ${styles.animFadeUp} ${styles.animDelay2}`}
               >
-                ODESSEY
+                ODYSSEY
               </h1>
               <p
                 className={`${styles.heroTagline} ${styles.animFadeUp} ${styles.animDelay3}`}

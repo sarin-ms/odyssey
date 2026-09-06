@@ -13,10 +13,21 @@ const NAV_ITEMS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = (window.scrollY / totalHeight) * 100;
+        setScrollProgress(Math.min(100, Math.max(0, progress)));
+      }
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -33,7 +44,7 @@ export default function Navbar() {
       id="main-nav"
     >
       <a href="#" className={styles.navLogo}>
-        ODESSEY
+        ODYSSEY
       </a>
 
       <ul
@@ -68,6 +79,19 @@ export default function Navbar() {
         <span className={styles.hamburgerLine} />
         <span className={styles.hamburgerLine} />
       </button>
+
+      {/* Scroll Progress Bar along bottom of Navbar */}
+      <div
+        className={`${styles.progressBarTrack} ${
+          scrollProgress > 0 ? styles.progressVisible : ""
+        }`}
+        aria-hidden="true"
+      >
+        <div
+          className={styles.progressBarFill}
+          style={{ transform: `scaleX(${scrollProgress / 100})` }}
+        />
+      </div>
     </nav>
   );
 }
