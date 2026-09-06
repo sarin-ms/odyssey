@@ -1,8 +1,21 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Zapf Renaissance';
+  src: url('/assets/Zapf Renaissance Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-cream: #f5efe6;
+  --color-brown-dark: #3d2b1f;
+  --color-brown-mid: #5c3a21;
+  --color-brown-text: #4a2e1a;
+  --color-brown-light: #8b6914;
+  --font-display: 'Zapf Renaissance', 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 @theme inline {
@@ -12,15 +25,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-brown-dark);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
