@@ -7,9 +7,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 60px 0px;
+  padding: 110px 60px 30px;
   overflow: hidden;
   margin-bottom: 0px;
+  scroll-margin-top: 90px;
 }
 
 .aboutInner {
@@ -88,6 +89,18 @@
   line-height: 1.62;
   color: #443224;
   opacity: 0.9;
+}
+
+.highlightQuote {
+  font-style: italic;
+  color: #3b2516;
+  border-left: 2px solid #b8860b;
+  padding-left: 14px;
+  line-height: 1.65;
+  background: rgba(184, 134, 11, 0.04);
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border-radius: 0 6px 6px 0;
 }
 
 /* ── Center Graphic: Trojan Horse + Circle Halo ── */
@@ -322,47 +335,28 @@
 
 @media (max-width: 1040px) {
   .aboutSection {
-    padding: 100px 30px 60px;
+    padding: 115px 30px 60px;
     min-height: auto;
+    scroll-margin-top: 80px;
   }
 
   .aboutInner {
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+    gap: 44px;
     min-height: auto;
   }
 
   .leftCol,
   .rightCol {
-    max-width: 650px;
+    max-width: 600px;
+    width: 100%;
     margin: 0 auto;
     text-align: left;
   }
 
   .centerGraphic {
-    position: relative;
-    left: auto;
-    bottom: auto;
-    transform: none;
-    width: 360px;
-    height: 330px;
-    margin: 10px 0;
-  }
-
-  .fadeScale {
-    transform: scale(0.96);
-  }
-
-  .fadeScale.visible {
-    transform: scale(1);
-  }
-
-  .circleHalo {
-    left: 50%;
-    top: 10px;
-    width: 270px;
-    height: 270px;
+    display: none;
   }
 
   .statsCard {
@@ -372,7 +366,8 @@
 
 @media (max-width: 680px) {
   .aboutSection {
-    padding: 90px 20px 50px;
+    padding: 105px 22px 50px;
+    scroll-margin-top: 75px;
   }
 
   .badgeWrapper {
@@ -380,44 +375,47 @@
     margin-bottom: 16px;
   }
 
+  .badgeText {
+    font-size: 0.7rem;
+  }
+
   .badgeLine {
-    width: 36px;
+    width: 40px;
   }
 
   .mainTitle {
-    font-size: 2.6rem;
+    font-size: clamp(2.4rem, 8.5vw, 3rem);
     margin-bottom: 20px;
   }
 
   .themeTitle {
-    font-size: 2.2rem;
-    margin-bottom: 18px;
+    font-size: clamp(2rem, 7.5vw, 2.6rem);
+    margin-bottom: 20px;
   }
 
   .paragraph {
     font-size: 0.88rem;
+    line-height: 1.68;
   }
 
-  .centerGraphic {
-    width: 320px;
-    height: 300px;
-  }
-
-  .circleHalo {
-    width: 260px;
-    height: 260px;
+  .textStack {
+    gap: 16px;
   }
 
   .statsCard {
     grid-template-columns: repeat(2, 1fr);
     row-gap: 16px;
-    padding: 16px 12px;
+    padding: 18px 14px;
+    background: rgba(236, 226, 215, 0.65);
+    border: 1px solid rgba(160, 135, 110, 0.22);
+    border-radius: 10px;
+    box-shadow: 0 8px 26px rgba(42, 27, 18, 0.05);
   }
 
   .statItem:nth-child(1),
   .statItem:nth-child(2) {
     border-bottom: 1px solid rgba(140, 110, 85, 0.16);
-    padding-bottom: 12px;
+    padding-bottom: 14px;
   }
 
   .statItem:nth-child(2) {
@@ -426,14 +424,62 @@
 
   .statItem:nth-child(3) {
     border-right: 1px solid rgba(140, 110, 85, 0.16);
-    padding-top: 4px;
+    padding-top: 6px;
   }
 
   .statItem:nth-child(4) {
-    padding-top: 4px;
+    padding-top: 6px;
   }
 
   .statLabel {
-    max-width: 130px;
+    max-width: 140px;
+    font-size: 0.64rem;
+    line-height: 1.35;
+  }
+
+  .statValue {
+    font-size: 0.94rem;
+  }
+
+  .iconCircle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .statSvg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutSection {
+    padding: 95px 18px 40px;
+  }
+
+  .mainTitle {
+    font-size: 2.2rem;
+  }
+
+  .themeTitle {
+    font-size: 1.85rem;
+  }
+
+  .paragraph {
+    font-size: 0.85rem;
+  }
+
+  .statsCard {
+    padding: 16px 10px;
+    row-gap: 14px;
+  }
+
+  .statValue {
+    font-size: 0.88rem;
+  }
+
+  .statLabel {
+    font-size: 0.6rem;
+    max-width: 120px;
   }
 }

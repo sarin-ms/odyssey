@@ -22,7 +22,9 @@ const STATS = [
     id: "participants",
     value: "150+ Participants",
     label: "Students and innovators from higher education institutions",
-    icon: <GraduationCap size={18} strokeWidth={1.8} className={styles.statSvg} />,
+    icon: (
+      <GraduationCap size={18} strokeWidth={1.8} className={styles.statSvg} />
+    ),
   },
   {
     id: "theme",
@@ -43,7 +45,7 @@ export default function About() {
           setVisible(true);
         }
       },
-      { threshold: 0.12 }
+      { threshold: 0.12 },
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -57,39 +59,50 @@ export default function About() {
       <div className={styles.aboutInner}>
         {/* ── Left Column: The Expedition ── */}
         <div className={styles.leftCol}>
-          <div className={`${styles.badgeWrapper} ${styles.fadeUp} ${v} ${styles.delay1}`}>
+          <div
+            className={`${styles.badgeWrapper} ${styles.fadeUp} ${v} ${styles.delay1}`}
+          >
             <span className={styles.badgeText}>ABOUT THE EVENT</span>
             <span className={styles.badgeLine} />
           </div>
 
-          <h2 className={`${styles.mainTitle} ${styles.fadeUp} ${v} ${styles.delay2}`}>
+          <h2
+            className={`${styles.mainTitle} ${styles.fadeUp} ${v} ${styles.delay2}`}
+          >
             <span className={styles.titleLineOne}>The</span>
             <span className={styles.titleLineTwo}>Expedition</span>
           </h2>
 
-          <div className={`${styles.textStack} ${styles.fadeUp} ${v} ${styles.delay3}`}>
+          <div
+            className={`${styles.textStack} ${styles.fadeUp} ${v} ${styles.delay3}`}
+          >
             <p className={styles.paragraph}>
-              ODYSSEY is a 32-hour innovation and development hackathon organized by IEDC BOOTCAMP CEC and 
-              μLearn CHN, bringing together students, developers, innovators, and
-              technology enthusiasts to build solutions to real-world problems.
+              ODYSSEY is a 32-hour innovation and development hackathon
+              organized by IEDC BOOTCAMP CEC and μLearn CHN, bringing together
+              students, developers, innovators, and technology enthusiasts to
+              build solutions to real-world problems.
             </p>
 
             <p className={styles.paragraph}>
-              The hackathon follows a structured journey beginning with problem discovery and
-              research, moving through ideation and validation, culminating in the development
-              and demonstration of a functional prototype.
+              The hackathon follows a structured journey beginning with problem
+              discovery and research, moving through ideation and validation,
+              culminating in the development and demonstration of a functional
+              prototype.
             </p>
 
             <p className={styles.paragraph}>
-              Participants will explore modern technologies across AI, software, hardware, cloud,
-              mobile development, and emerging technologies, with opportunities to learn through
-              technical sessions, mentorship, collaborative activities, and hands-on development.
+              Participants will explore modern technologies across AI, software,
+              hardware, cloud, mobile development, and emerging technologies,
+              with opportunities to learn through technical sessions,
+              mentorship, collaborative activities, and hands-on development.
             </p>
           </div>
         </div>
 
         {/* ── Center / Lower Center Graphic: Circular Halo & Wooden Trojan Horse ── */}
-        <div className={`${styles.centerGraphic} ${styles.fadeScale} ${v} ${styles.delay2}`}>
+        <div
+          className={`${styles.centerGraphic} ${styles.fadeScale} ${v} ${styles.delay2}`}
+        >
           <div className={styles.circleHalo} />
           <div className={styles.horseFrame}>
             <Image
@@ -105,27 +118,34 @@ export default function About() {
 
         {/* ── Right Column: One Theme. Unlimited Possibilities ── */}
         <div className={styles.rightCol}>
-          <h2 className={`${styles.themeTitle} ${styles.fadeUp} ${v} ${styles.delay2}`}>
+          <h2
+            className={`${styles.themeTitle} ${styles.fadeUp} ${v} ${styles.delay2}`}
+          >
             <span className={styles.themeLineOne}>One Theme.</span>
             <span className={styles.themeLineTwo}>Unlimited Possibilities</span>
           </h2>
 
-          <div className={`${styles.textStack} ${styles.fadeUp} ${v} ${styles.delay3}`}>
+          <div
+            className={`${styles.textStack} ${styles.fadeUp} ${v} ${styles.delay3}`}
+          >
             <p className={styles.paragraph}>
-              ODYSSEY does not limit participants to a predefined problem statement. Teams are
-              encouraged to identify meaningful real-world problems, understand the people and
-              contexts affected by them, study existing solutions, and develop innovative
-              approaches of their own.
+              ODYSSEY does not limit participants to a predefined problem
+              statement. Teams are encouraged to identify meaningful real-world
+              problems, understand the people and contexts affected by them,
+              study existing solutions, and develop innovative approaches of
+              their own.
             </p>
 
-            <p className={styles.paragraph}>
-              Your starting idea is not your final destination. Research, feedback, and validation
-              can reshape the solution as you build.
+            <p className={`${styles.paragraph} ${styles.highlightQuote}`}>
+              Your starting idea is not your final destination. Research,
+              feedback, and validation can reshape the solution as you build.
             </p>
           </div>
 
           {/* Frosted Glass Stats Card */}
-          <div className={`${styles.statsCard} ${styles.fadeUp} ${v} ${styles.delay4}`}>
+          <div
+            className={`${styles.statsCard} ${styles.fadeUp} ${v} ${styles.delay4}`}
+          >
             {STATS.map((stat) => (
               <div key={stat.id} className={styles.statItem}>
                 <div className={styles.iconCircle}>{stat.icon}</div>

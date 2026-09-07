@@ -26,7 +26,7 @@ export default function Hero() {
               <p
                 className={`${styles.heroSubtitle} ${styles.animFadeUp} ${styles.animDelay1}`}
               >
-                 IEDC BOOTCAMP CEC × μLEARN CHN
+                IEDC BOOTCAMP CEC × μLEARN CHN
               </p>
               <h1
                 className={`${styles.heroTitle} ${styles.animFadeUp} ${styles.animDelay2}`}
@@ -36,19 +36,32 @@ export default function Hero() {
               <p
                 className={`${styles.heroTagline} ${styles.animFadeUp} ${styles.animDelay3}`}
               >
-                Endless Possibilities.
+                ENDLESS POSSIBILITIES.
                 <br />
-                A Creative Expedition for Curious Minds.
+                A CREATIVE EXPEDITION FOR CURIOUS MINDS.
               </p>
+
               <a
                 href="#register"
-                className={`${styles.heroCta} ${styles.animFadeUp} ${styles.animDelay4}`}
+                className={`${styles.heroCtaPlaque} ${styles.animFadeUp} ${styles.animDelay4}`}
               >
-                Register Now <span className={styles.ctaArrow}>→</span>
+                <div className={styles.plaqueOuter}>
+                  <div className={styles.plaqueInner}>
+                    <span className={styles.plaqueStar}>
+                      <img src="/assets/star.png" alt="" width={24} height={24}/>
+                    </span>
+                    <span className={styles.plaqueDivider} />
+                    <span className={styles.plaqueText}>REGISTER NOW</span>
+                    <span className={styles.plaqueArrow}>→</span>
+                  </div>
+                </div>
               </a>
             </div>
 
-            <div className={`${styles.heroImageWrapper} ${styles.animFadeRight}`}>
+            <div
+              className={`${styles.heroImageWrapper} ${styles.animFadeRight}`}
+            >
+              <div className={styles.horseHalo} />
               <Image
                 src={horseImg}
                 alt="Trojan horse wooden sculpture"
@@ -60,7 +73,6 @@ export default function Hero() {
         </section>
       </div>
 
-      {/* Spacer takes up the hero's space in document flow */}
       <div className={styles.heroSpacer} />
     </>
   );

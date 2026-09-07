@@ -5,9 +5,11 @@ import styles from "./Navbar.module.css";
 
 const NAV_ITEMS = [
   { label: "About", href: "#about" },
+  { label: "Organizers", href: "#organizers" },
   { label: "Prize", href: "#prize" },
+  { label: "Structure", href: "#structure" },
+  { label: "Schedule", href: "#schedule" },
   { label: "Partners", href: "#partners" },
-  { label: "FAQ", href: "#faq" },
 ];
 
 export default function Navbar() {
