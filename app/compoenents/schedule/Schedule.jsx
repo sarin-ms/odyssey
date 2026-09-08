@@ -16,19 +16,20 @@ const ico = {
   "aria-hidden": true,
 };
 
-const RocketIcon = () => (
+const AnchorIcon = () => (
   <svg {...ico}>
-    <path d="M4.5 16.5c-1.5 1.5-1.5 3.5 0 5s3.5 1.5 5 0L15 16l-2-2-8.5 2.5z" />
-    <path d="M12 15l-3-3 8-8a2 2 0 0 1 3 3l-8 8z" />
-    <circle cx="18.5" cy="5.5" r="1.2" />
+    <circle cx="12" cy="5" r="2" />
+    <path d="M12 7v13M5 11H2.5M21.5 11H19" />
+    <path d="M5 15c.8 3.4 3.2 5 7 5s6.2-1.6 7-5" />
+    <path d="m5 15-2.5 2M19 15l2.5 2" />
   </svg>
 );
 
-const RadarIcon = () => (
+const HelmIcon = () => (
   <svg {...ico}>
-    <circle cx="12" cy="12" r="9" />
-    <circle cx="12" cy="12" r="4.5" />
-    <path d="M12 12l6-4.5" />
+    <circle cx="12" cy="12" r="7" />
+    <circle cx="12" cy="12" r="2.5" />
+    <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2.2 2.2M16.8 16.8 19 19M19 5l-2.2 2.2M7.2 16.8 5 19" />
   </svg>
 );
 
@@ -133,86 +134,86 @@ const BLOCKS = [
   {
     num: "01",
     span: "9:00 – 10:30 AM",
-    title: "Launch Window",
-    icon: <RocketIcon />,
+    title: "Cast Off",
+    icon: <AnchorIcon />,
     day: "Day 1",
     dayDate: "19 Sept 2026",
     items: [
       "Registration",
       "Inauguration + Google keynote",
-      "Tools: Gemini, AI Studio, Antigravity, Pomelli",
+      "Navigation tools: Gemini, AI Studio, Antigravity, Pomelli",
     ],
   },
   {
     num: "02",
     span: "10:30 – 11:00 AM",
-    title: "Mission Briefing",
-    icon: <RadarIcon />,
-    items: ["Crew sync", "Open theme reveal", "Mission Control setup"],
+    title: "Captain’s Briefing",
+    icon: <HelmIcon />,
+    items: ["Crew muster", "Open theme reveal", "Crew stations setup"],
   },
   {
     num: "03",
     span: "11:00 AM – 12:30 PM",
-    title: "Recon",
+    title: "Chart the Unknown",
     icon: <SearchIcon />,
-    items: ["Problem discovery", "Checkpoint 1 — Trajectory Lock"],
+    items: ["Problem discovery", "Port 1 — Course plotted"],
   },
   {
     num: "04",
     span: "12:30 – 1:30 PM",
-    title: "Refuel",
+    title: "Galley Break",
     icon: <CoffeeIcon />,
     items: ["Lunch", "Crew mixer"],
   },
   {
     num: "05",
     span: "1:30 – 2:45 PM",
-    title: "Clearance",
+    title: "Course Clearance",
     icon: <ClipboardIcon />,
     items: [
       "Feasibility & market study",
-      "Checkpoint 2 — Launch Clearance Briefing",
+      "Port 2 — Captain’s clearance briefing",
     ],
   },
   {
     num: "06",
     span: "2:45 – 3:50 PM",
-    title: "Identity Sprint",
+    title: "Raise the Colors",
     icon: <PaletteIcon />,
     items: [
       "Build with Google Pomelli + AI tools",
-      "Checkpoint 3 — Callsign & Insignia Reveal",
+      "Port 3 — Colors & crest reveal",
     ],
   },
   {
     num: "07",
     span: "3:50 – 4:30 PM",
-    title: "Press Briefing",
+    title: "Signal the Fleet",
     icon: <MicIcon />,
-    items: ["Checkpoint 4", "Rotating mock-media stations"],
+    items: ["Port 4", "Rotating mock-media stations"],
   },
   {
     num: "08",
     span: "4:30 – 6:00 PM",
-    title: "Final Countdown",
+    title: "First Passage",
     icon: <TimerIcon />,
     items: [
-      "Checkpoint 5 — pitch rehearsal",
-      "Go for Launch — funding pitch",
+      "Port 5 — Pitch rehearsal",
+      "Set sail — funding pitch",
       "Closes Phase 1",
     ],
   },
   {
     num: "09",
     span: "6:00 – 9:00 PM",
-    title: "Planetfall",
+    title: "Shore Leave",
     icon: <PulseIcon />,
     items: ["Physical activity circuit", "Culturals + dinner"],
   },
   {
     num: "10",
     span: "9:00 PM – 1:00 AM",
-    title: "The Journey Begins",
+    title: "Open Waters",
     icon: <CodeIcon />,
     items: ["Build phase kickoff", "Build sprint 1"],
   },
@@ -224,7 +225,7 @@ const BLOCKS = [
     day: "Day 2",
     dayDate: "20 Sept 2026",
     items: [
-      "Waypoint 1 — Course Check",
+      "Waypoint 1 — Course check",
       "Build sprint (short)",
       "Comms check — midnight icebreaker",
     ],
@@ -232,36 +233,36 @@ const BLOCKS = [
   {
     num: "12",
     span: "2:30 – 9:00 AM",
-    title: "Overnight Stretch",
+    title: "Night Watch",
     icon: <MoonIcon />,
     items: [
       "Build sprint 2 — main stretch",
       "Breakfast",
-      "Waypoint 2 — First Contact",
+      "Waypoint 2 — First contact",
     ],
   },
   {
     num: "13",
     span: "9:00 AM – 1:00 PM",
-    title: "Final Approach",
+    title: "Final Bearing",
     icon: <SlidersIcon />,
     items: ["Build sprint 3 — iterate & polish", "Lunch"],
   },
   {
     num: "14",
     span: "1:00 – 2:00 PM",
-    title: "Demo Prep",
+    title: "Harbor Approach",
     icon: <MonitorIcon />,
-    items: ["Waypoint 3 — Landfall", "Final polish & rehearsal"],
+    items: ["Waypoint 3 — Harbor sighted", "Final polish & rehearsal"],
   },
   {
     num: "15",
     span: "2:00 – 5:00 PM",
-    title: "Landing Day",
+    title: "Homecoming",
     icon: <FlagIcon />,
     items: [
       "Final demos + judging",
-      "Landing Day Showcase",
+      "Homecoming showcase",
       "Closing ceremony",
     ],
   },
@@ -269,25 +270,44 @@ const BLOCKS = [
 
 const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
 
+const VoyageShip = () => (
+  <svg viewBox="0 0 72 52" aria-hidden="true" focusable="false">
+    <path className={styles.shipWake} d="M3 47c8-4 14 4 22 0s14 4 22 0 14 4 22 0" />
+    <path className={styles.shipMast} d="M36 5v31" />
+    <path className={styles.shipSailMain} d="M33 8 12 33h21Z" />
+    <path className={styles.shipSailRear} d="m39 12 18 21H39Z" />
+    <path className={styles.shipHull} d="M7 35h58l-9 10H18Z" />
+    <path className={styles.shipTrim} d="M15 39h43" />
+  </svg>
+);
+
 export default function Schedule() {
   const wrapperRef = useRef(null);
   const stageRef = useRef(null);
   const viewportRef = useRef(null);
   const trackRef = useRef(null);
   const progressRef = useRef(null);
+  const progressTrackRef = useRef(null);
 
-  /* scrollLen — horizontal distance the track must travel, in px.
-     stageH   — measured height of the pinned stage. Measured rather than
-                assumed from window.innerHeight: on mobile the URL bar
-                collapsing changes innerHeight mid-scroll, which would
-                desync the travel. The stage is sized in svh so it stays put. */
   const [metrics, setMetrics] = useState({ scrollLen: 0, stageH: 0 });
-  // Pinning applies on every screen size; only reduced-motion opts out.
   const [pinned, setPinned] = useState(false);
   const [visible, setVisible] = useState(false);
 
-  /* Decide whether to pin. Needs a minimum viewport height, otherwise the
-     pinned stage has too little room for the cards (e.g. landscape phones). */
+  const renderVoyageProgress = useCallback((value) => {
+    const progress = clamp(value, 0, 1);
+
+    if (progressRef.current) {
+      progressRef.current.style.transform = `scaleX(${progress})`;
+    }
+
+    if (progressTrackRef.current) {
+      progressTrackRef.current.style.setProperty(
+        "--voyage-progress",
+        `${(progress * 100).toFixed(3)}%`,
+      );
+    }
+  }, []);
+
   useEffect(() => {
     const ok = window.matchMedia(
       "(min-height: 480px) and (prefers-reduced-motion: no-preference)",
@@ -300,7 +320,6 @@ export default function Schedule() {
     return () => ok.removeEventListener("change", sync);
   }, []);
 
-  /* Measure track overflow and stage height. */
   const measure = useCallback(() => {
     const track = trackRef.current;
     const view = viewportRef.current;
@@ -336,50 +355,54 @@ export default function Schedule() {
     };
   }, [measure, pinned]);
 
-  /* Map vertical scroll through the tall wrapper onto horizontal track travel. */
+
   useEffect(() => {
     const track = trackRef.current;
-    if (!track) return;
-
-    if (!pinned) {
-      track.style.transform = "";
-      if (progressRef.current) progressRef.current.style.transform = "scaleX(0)";
-      return;
-    }
+    const viewport = viewportRef.current;
+    if (!track || !viewport) return;
 
     let raf = 0;
 
     const update = () => {
       raf = 0;
-      const wrap = wrapperRef.current;
-      if (!wrap || !track) return;
 
-      // Travel equals scrollLen by construction (wrapper = stageH + scrollLen),
-      // so the last card lands exactly as the section releases.
-      const travel = wrap.offsetHeight - metrics.stageH;
-      const progress =
-        travel > 0 ? clamp(-wrap.getBoundingClientRect().top / travel, 0, 1) : 0;
+      if (pinned) {
+        const wrap = wrapperRef.current;
+        if (!wrap) return;
 
-      track.style.transform = `translate3d(${-(progress * metrics.scrollLen)}px, 0, 0)`;
-      if (progressRef.current) {
-        progressRef.current.style.transform = `scaleX(${progress})`;
+
+        const travel = wrap.offsetHeight - metrics.stageH;
+        const progress =
+          travel > 0
+            ? clamp(-wrap.getBoundingClientRect().top / travel, 0, 1)
+            : 0;
+
+        track.style.transform = `translate3d(${-(progress * metrics.scrollLen)}px, 0, 0)`;
+        renderVoyageProgress(progress);
+        return;
       }
+
+      track.style.transform = "";
+      const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+      const progress = maxScroll > 0 ? viewport.scrollLeft / maxScroll : 0;
+      renderVoyageProgress(progress);
     };
 
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
     };
 
+    const scrollTarget = pinned ? window : viewport;
     update();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    scrollTarget.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
 
     return () => {
       if (raf) cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
+      scrollTarget.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, [pinned, metrics.scrollLen, metrics.stageH]);
+  }, [pinned, metrics.scrollLen, metrics.stageH, renderVoyageProgress]);
 
   /* Entrance animation. */
   useEffect(() => {
@@ -404,7 +427,7 @@ export default function Schedule() {
           ? { height: `${metrics.stageH + metrics.scrollLen}px` }
           : undefined
       }
-      aria-label="Event schedule"
+      aria-label="Odyssey event voyage schedule"
     >
       <div
         className={`${styles.stage} ${pinned ? styles.stagePinned : ""}`}
@@ -414,20 +437,20 @@ export default function Schedule() {
           <div
             className={`${styles.badgeWrapper} ${styles.fadeUp} ${v} ${styles.delay1}`}
           >
-            <span className={styles.badgeText}>SCHEDULE</span>
+            <span className={styles.badgeText}>VOYAGE ITINERARY</span>
             <span className={styles.badgeLine} />
           </div>
 
           <h2
             className={`${styles.sectionTitle} ${styles.fadeUp} ${v} ${styles.delay2}`}
           >
-            The 32-Hour Journey
+            The 32-Hour Odyssey
           </h2>
 
           <p
             className={`${styles.subtitle} ${styles.fadeUp} ${v} ${styles.delay3}`}
           >
-            Every phase builds towards the next.
+            Fifteen ports of call. One voyage from first idea to final showcase.
           </p>
         </div>
 
@@ -438,8 +461,10 @@ export default function Schedule() {
             pinned ? styles.viewportPinned : styles.viewportFree
           }`}
           ref={viewportRef}
+          tabIndex={pinned ? undefined : 0}
+          aria-label={pinned ? undefined : "Scrollable voyage timeline"}
         >
-          <ol className={styles.track} ref={trackRef}>
+          <ol className={`${styles.track} ${v}`} ref={trackRef}>
             {BLOCKS.map((block, i) => {
               const onTop = i % 2 === 0;
 
@@ -450,7 +475,7 @@ export default function Schedule() {
                     onTop ? styles.colTop : styles.colBottom
                   }`}
                 >
-                  {/* Fixed-height lane in every column so the axis row stays
+                  {/* Fixed-height lane in every column so the route stays
                       aligned across columns, badge or not. */}
                   <div className={styles.dayLane}>
                     {block.day && (
@@ -472,7 +497,12 @@ export default function Schedule() {
                   <div className={styles.cellAxis}>
                     <span className={styles.axisLine} aria-hidden="true" />
                     <span className={styles.span}>{block.span}</span>
-                    <span className={styles.node}>{block.num}</span>
+                    <span
+                      className={styles.node}
+                      aria-label={`Voyage stop ${block.num}`}
+                    >
+                      {block.num}
+                    </span>
                   </div>
 
                   <div className={styles.cellBottom}>
@@ -484,8 +514,20 @@ export default function Schedule() {
           </ol>
         </div>
 
-        <div className={styles.progressTrack} aria-hidden="true">
-          <span className={styles.progressFill} ref={progressRef} />
+        <div
+          className={`${styles.voyageProgress} ${v}`}
+          aria-hidden="true"
+        >
+          <div className={styles.progressLabels}>
+            <span>Departure</span>
+            <span>Final showcase</span>
+          </div>
+          <div className={styles.progressTrack} ref={progressTrackRef}>
+            <span className={styles.progressFill} ref={progressRef} />
+            <span className={styles.shipMarker}>
+              <VoyageShip />
+            </span>
+          </div>
         </div>
       </div>
     </section>
@@ -496,7 +538,10 @@ function BlockCard({ block, place }) {
   const head = (
     <div className={styles.cardHead}>
       <span className={styles.cardIcon}>{block.icon}</span>
-      <h4 className={styles.cardTitle}>{block.title}</h4>
+      <div className={styles.cardHeading}>
+        <span className={styles.logLabel}>Voyage log {block.num}</span>
+        <h3 className={styles.cardTitle}>{block.title}</h3>
+      </div>
     </div>
   );
 
@@ -512,9 +557,9 @@ function BlockCard({ block, place }) {
     </div>
   );
 
-  /* Header band goes on the outer edge so the body faces the axis. */
+  /* Header band goes on the outer edge so the log body faces the route. */
   return (
-    <div className={styles.card}>
+    <div className={styles.card} data-stop={block.num}>
       {place === "top" ? (
         <>
           {head}

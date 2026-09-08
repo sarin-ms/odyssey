@@ -1,15 +1,39 @@
 .scheduleWrapper {
+  --sea-deep: #23484a;
+  --sea: #356a6a;
+  --sea-soft: #789b96;
+  --voyage-gold: #bb8e38;
+  --parchment: #f7f0e4;
   position: relative;
   z-index: 10;
+  isolation: isolate;
   width: 100%;
-  background: linear-gradient(180deg, #ebe3d8 0%, var(--color-cream) 100%);
+  background:
+    radial-gradient(circle at 12% 24%, rgba(53, 106, 106, 0.1), transparent 25%),
+    radial-gradient(circle at 88% 78%, rgba(187, 142, 56, 0.09), transparent 28%),
+    linear-gradient(180deg, #e8dfd3 0%, #f3ede4 58%, var(--color-cream) 100%);
+}
+
+.scheduleWrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.42;
+  background:
+    radial-gradient(circle at 8% 36%, transparent 0 54px, rgba(53, 106, 106, 0.13) 55px 56px, transparent 57px 74px, rgba(53, 106, 106, 0.08) 75px 76px, transparent 77px),
+    radial-gradient(circle at 91% 52%, transparent 0 80px, rgba(122, 84, 38, 0.1) 81px 82px, transparent 83px 105px, rgba(122, 84, 38, 0.07) 106px 107px, transparent 108px),
+    repeating-linear-gradient(112deg, transparent 0 54px, rgba(53, 106, 106, 0.025) 55px 56px);
+  pointer-events: none;
 }
 
 .stage {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: clamp(10px, 2vh, 22px);
-  padding: clamp(52px, 8vw, 80px) 0 clamp(16px, 2.5vh, 26px);
+  gap: clamp(9px, 1.7vh, 19px);
+  padding: clamp(52px, 8vw, 80px) 0 clamp(15px, 2.4vh, 24px);
 }
 
 .stagePinned {
@@ -17,11 +41,11 @@
   top: 0;
   height: 100vh;
   height: 100svh;
-  padding-top: clamp(74px, 11vh, 112px);
+  padding-top: clamp(72px, 10vh, 104px);
   overflow: hidden;
 }
 
-/* ── Header ── */
+/* ── Voyage heading ── */
 .header {
   flex-shrink: 0;
   text-align: center;
@@ -37,53 +61,65 @@
 
 .badgeText {
   font-family: var(--font-label);
-  font-size: clamp(0.66rem, 2.2vw, 0.75rem);
-  font-weight: 600;
-  letter-spacing: 0.26em;
-  color: #6b4a2c;
+  font-size: clamp(0.64rem, 2.2vw, 0.74rem);
+  font-weight: 650;
+  letter-spacing: 0.25em;
+  color: var(--sea-deep);
   text-transform: uppercase;
 }
 
 .badgeLine {
-  width: clamp(30px, 8vw, 50px);
+  position: relative;
+  width: clamp(36px, 9vw, 58px);
   height: 1px;
-  background-color: #5c3a21;
-  opacity: 0.5;
+  background: linear-gradient(90deg, var(--sea), var(--voyage-gold));
+  opacity: 0.72;
+}
+
+.badgeLine::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--voyage-gold);
+  transform: translate(50%, -50%);
 }
 
 .sectionTitle {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4.8vh, 3.2rem);
+  font-size: clamp(1.9rem, 4.9vh, 3.35rem);
   font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: -0.012em;
+  line-height: 1.05;
+  letter-spacing: 0.012em;
   font-kerning: normal;
   font-feature-settings: "kern" 1, "liga" 1;
   text-wrap: balance;
-  color: #2a1b12;
+  color: #26352f;
   margin-bottom: clamp(6px, 1.2vh, 12px);
-}
-
-.nowrap {
-  white-space: nowrap;
 }
 
 .subtitle {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: clamp(0.88rem, 2vh, 1.04rem);
-  line-height: 1.5;
-  color: #5c3a21;
-  opacity: 0.92;
+  font-size: clamp(0.86rem, 2vh, 1.03rem);
+  line-height: 1.48;
+  color: #53665f;
+  opacity: 0.96;
 }
 
+/* ── Horizontally scrolling chart ── */
 .viewport {
+  position: relative;
   flex: 1;
   min-height: 0;
 }
 
 .viewportPinned {
   overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
 }
 
 .viewportFree {
@@ -105,9 +141,9 @@
 .track {
   --col: clamp(240px, 20vw, 300px);
   --gap: clamp(10px, 1.2vw, 18px);
-  --lane: clamp(25px, 3.9vh, 31px); 
-  --axis-h: clamp(54px, 9.5vh, 64px);
-  --node: clamp(28px, 4.8vh, 34px);
+  --lane: clamp(25px, 3.9vh, 31px);
+  --axis-h: clamp(58px, 9.7vh, 68px);
+  --node: clamp(31px, 5vh, 37px);
   --pad-half: clamp(10px, 2vh, 18px);
 
   display: flex;
@@ -118,6 +154,10 @@
   margin: 0;
   padding: 0 clamp(24px, 6vw, 90px);
   list-style: none;
+  will-change: auto;
+}
+
+.viewportPinned .track {
   will-change: transform;
 }
 
@@ -130,27 +170,36 @@
 }
 
 .colTop {
-  --accent: #8b6914;
+  --accent: var(--sea);
 }
 
 .colBottom {
-  --accent: #7a4a24;
+  --accent: #8a5d32;
 }
 
 .colDayStart::before {
   content: "";
   position: absolute;
-  top: 0;
+  top: 2px;
   bottom: 0;
   left: calc(var(--gap) / -2);
-  width: 2px;
-  border-radius: 2px;
-  background: linear-gradient(
+  width: 1px;
+  background: repeating-linear-gradient(
     180deg,
-    #c9a24a 0%,
-    rgba(140, 110, 85, 0.42) 42%,
-    rgba(140, 110, 85, 0.1) 100%
+    var(--voyage-gold) 0 7px,
+    transparent 7px 12px
   );
+  opacity: 0.72;
+}
+
+.colDayStart::after {
+  content: "✦";
+  position: absolute;
+  top: -7px;
+  left: calc(var(--gap) / -2);
+  color: var(--voyage-gold);
+  font-size: 0.72rem;
+  transform: translateX(-48%);
 }
 
 .dayLane {
@@ -163,11 +212,11 @@
   display: inline-flex;
   align-items: baseline;
   gap: 8px;
-  padding: 4px 14px 5px 11px;
-  background: linear-gradient(135deg, #40291a, #26170d);
-  border-left: 3px solid #c9a24a;
-  border-radius: 0 999px 999px 0;
-  box-shadow: 0 3px 12px rgba(42, 27, 18, 0.3);
+  padding: 4px 18px 5px 11px;
+  background: linear-gradient(135deg, var(--sea-deep), #182f30);
+  border-left: 3px solid var(--voyage-gold);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+  box-shadow: 0 3px 12px rgba(30, 61, 62, 0.22);
   white-space: nowrap;
 }
 
@@ -177,17 +226,17 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #f6ecda;
+  color: #f8efdf;
 }
 
 .dayMarkDate {
   font-family: var(--font-label);
   font-size: clamp(0.57rem, 1.3vh, 0.65rem);
   font-weight: 500;
-  letter-spacing: 0.11em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
-  color: rgba(223, 194, 139, 0.88);
+  color: rgba(230, 204, 150, 0.92);
 }
 
 .cellTop {
@@ -204,71 +253,111 @@
   min-height: 0;
 }
 
+/* ── Parchment voyage logs ── */
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
   min-width: 0;
   overflow: hidden;
-  border: 1px solid rgba(160, 135, 110, 0.32);
-  border-radius: 12px;
-  background: rgba(247, 242, 234, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 6px 20px rgba(42, 27, 18, 0.07);
+  border: 1px solid rgba(66, 91, 83, 0.28);
+  border-radius: 3px 14px 3px 14px;
+  background:
+    linear-gradient(rgba(53, 106, 106, 0.025) 1px, transparent 1px) 0 0 / 100% 18px,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(242, 229, 208, 0.84)),
+    var(--parchment);
+  box-shadow:
+    0 8px 22px rgba(35, 72, 74, 0.08),
+    inset 0 0 24px rgba(122, 84, 38, 0.035);
   transition:
-    transform 0.28s ease,
-    box-shadow 0.28s ease,
-    border-color 0.28s ease;
+    box-shadow var(--motion-duration-fast) ease,
+    border-color var(--motion-duration-fast) ease;
+}
+
+.card::before {
+  content: attr(data-stop);
+  position: absolute;
+  right: 8px;
+  bottom: -11px;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3.8rem, 8vh, 5rem);
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.045;
+  pointer-events: none;
 }
 
 .card:hover {
-  border-color: rgba(160, 135, 110, 0.5);
-  box-shadow: 0 12px 30px rgba(42, 27, 18, 0.13);
+  border-color: rgba(53, 106, 106, 0.46);
+  box-shadow:
+    0 12px 30px rgba(35, 72, 74, 0.13),
+    inset 0 0 24px rgba(122, 84, 38, 0.045);
 }
 
-.colTop .card:hover {
-  transform: translateY(-3px);
-}
-
+.colTop .card:hover,
 .colBottom .card:hover {
-  transform: translateY(3px);
+  transform: none;
+}
+
+.cardHead,
+.cardBody {
+  position: relative;
+  z-index: 1;
 }
 
 .cardHead {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: clamp(6px, 1.1vh, 9px) clamp(11px, 1.4vw, 14px);
-  background: var(--accent);
+  gap: 10px;
+  padding: clamp(7px, 1.2vh, 10px) clamp(11px, 1.4vw, 14px);
+  background: linear-gradient(128deg, var(--accent), var(--sea-deep));
+  border-left: 3px solid var(--voyage-gold);
 }
 
 .cardIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(24px, 4vh, 30px);
-  height: clamp(24px, 4vh, 30px);
+  width: clamp(26px, 4.2vh, 31px);
+  height: clamp(26px, 4.2vh, 31px);
   flex-shrink: 0;
-  border-radius: 50%;
-  background: #fdfaf5;
+  clip-path: polygon(50% 0, 88% 14%, 100% 50%, 86% 88%, 50% 100%, 12% 86%, 0 50%, 14% 12%);
+  background: #f8efdf;
   color: var(--accent);
 }
 
 .cardIcon svg {
-  width: 62%;
-  height: 62%;
+  width: 60%;
+  height: 60%;
+}
+
+.cardHeading {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.logLabel {
+  font-family: var(--font-label);
+  font-size: clamp(0.48rem, 1.05vh, 0.56rem);
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  color: rgba(241, 210, 148, 0.9);
+  text-transform: uppercase;
 }
 
 .cardTitle {
-  font-family: var(--font-display);
-  font-size: clamp(0.96rem, 2.25vh, 1.16rem);
-  font-weight: 500;
-  letter-spacing: 0.035em;
-  color: #fdfaf5;
-  line-height: 1.2;
-  overflow-wrap: break-word;
   min-width: 0;
+  font-family: var(--font-display);
+  font-size: clamp(0.98rem, 2.25vh, 1.18rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #fffaf0;
+  line-height: 1.15;
+  overflow-wrap: break-word;
 }
 
 .cardBody {
@@ -278,7 +367,7 @@
 .bullets {
   display: flex;
   flex-direction: column;
-  gap: clamp(3px, 0.8vh, 7px);
+  gap: clamp(3px, 0.75vh, 7px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -288,10 +377,10 @@
   position: relative;
   padding-left: 18px;
   font-family: var(--font-body);
-  font-size: clamp(0.78rem, 1.72vh, 0.89rem);
-  line-height: 1.52;
+  font-size: clamp(0.77rem, 1.7vh, 0.88rem);
+  line-height: 1.5;
   letter-spacing: -0.003em;
-  color: #46331f;
+  color: #3f4d47;
   font-variant-numeric: tabular-nums;
   overflow-wrap: break-word;
 }
@@ -299,15 +388,16 @@
 .bullet::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0.45em;
-  width: 6.5px;
-  height: 6.5px;
+  left: 1px;
+  top: 0.48em;
+  width: 6px;
+  height: 6px;
   border: 1.5px solid var(--accent);
-  border-radius: 50%;
-  opacity: 0.85;
+  transform: rotate(45deg);
+  opacity: 0.8;
 }
 
+/* ── Sea route and compass ports ── */
 .cellAxis {
   position: relative;
   min-width: 0;
@@ -318,43 +408,79 @@
   left: calc(var(--gap) / -2 - 1px);
   right: calc(var(--gap) / -2 - 1px);
   top: 50%;
-  height: 2px;
-  margin-top: -1px;
-  background: rgba(140, 110, 85, 0.42);
+  height: 12px;
+  margin-top: -6px;
+  background: radial-gradient(
+      12px 7px at 50% 0,
+      transparent 6px,
+      rgba(53, 106, 106, 0.46) 6.5px 7.5px,
+      transparent 8px
+    )
+    0 5px / 24px 10px repeat-x;
+}
+
+.axisLine::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5px;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(187, 142, 56, 0.68) 0 7px,
+    transparent 7px 13px
+  );
 }
 
 .node {
   position: absolute;
   left: 0;
   top: 50%;
-  transform: translateY(-50%);
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
   width: var(--node);
   height: var(--node);
+  border: 2px solid var(--accent);
   border-radius: 50%;
-  background: var(--accent);
-  border: 3px solid var(--color-cream);
+  background: #f8f0e4;
   font-family: var(--font-label);
-  font-size: clamp(0.66rem, 1.55vh, 0.75rem);
-  font-weight: 700;
+  font-size: clamp(0.62rem, 1.5vh, 0.72rem);
+  font-weight: 750;
   letter-spacing: 0.02em;
   font-variant-numeric: tabular-nums;
-  color: #fdfaf5;
-  box-shadow: 0 3px 10px rgba(42, 27, 18, 0.22);
+  color: var(--accent);
+  box-shadow:
+    0 3px 11px rgba(35, 72, 74, 0.2),
+    inset 0 0 0 3px #f8f0e4,
+    inset 0 0 0 4px rgba(53, 106, 106, 0.18);
+  transform: translateY(-50%);
+}
+
+.node::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 1px dashed rgba(53, 106, 106, 0.32);
+  border-radius: 50%;
+  transform: rotate(25deg);
 }
 
 .node::after {
   content: "";
   position: absolute;
   left: 50%;
-  width: 2px;
-  margin-left: -1px;
+  width: 1px;
+  margin-left: -0.5px;
   height: calc((var(--axis-h) - var(--node)) / 2 + var(--pad-half));
-  background: var(--accent);
-  opacity: 0.45;
+  background: repeating-linear-gradient(
+    180deg,
+    var(--accent) 0 5px,
+    transparent 5px 9px
+  );
+  opacity: 0.55;
 }
 
 .colTop .node::after {
@@ -367,71 +493,296 @@
 
 .span {
   position: absolute;
-  left: calc(var(--node) + 8px);
+  left: calc(var(--node) + 11px);
   right: 6px;
-  bottom: calc(50% + 7px);
+  bottom: calc(50% + 8px);
   text-align: center;
   font-family: var(--font-label);
-  font-size: clamp(0.68rem, 1.5vh, 0.77rem);
-  font-weight: 600;
-  letter-spacing: 0.07em;
+  font-size: clamp(0.64rem, 1.45vh, 0.74rem);
+  font-weight: 650;
+  letter-spacing: 0.055em;
   font-variant-numeric: tabular-nums;
-  color: #6b4a2c;
+  color: #49625e;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.progressTrack {
+/* ── Ship-driven voyage progress ── */
+.voyageProgress {
+  position: relative;
   flex-shrink: 0;
-  height: 3px;
+  height: 31px;
   margin: 0 clamp(24px, 6vw, 90px);
-  border-radius: 999px;
-  background: rgba(140, 110, 85, 0.18);
-  overflow: hidden;
-}
-
-.progressFill {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #8b6914, #c89d66, #7a4a24);
-  transform: scaleX(0);
-  transform-origin: left center;
-}
-
-.fadeUp {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(9px);
   transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.7s var(--motion-ease-soft),
+    transform 0.8s var(--motion-ease-out);
 }
 
-.fadeUp.visible {
+.voyageProgress.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
+.progressLabels {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-label);
+  font-size: clamp(0.47rem, 1.1vh, 0.56rem);
+  font-weight: 650;
+  letter-spacing: 0.13em;
+  color: rgba(35, 72, 74, 0.72);
+  text-transform: uppercase;
+}
+
+.progressTrack {
+  --voyage-progress: 0%;
+  position: absolute;
+  top: 3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 999px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(53, 106, 106, 0.25) 0 8px,
+    rgba(53, 106, 106, 0.06) 8px 14px
+  );
+  overflow: visible;
+}
+
+.progressTrack::before,
+.progressTrack::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--sea);
+  border-radius: 50%;
+  background: var(--parchment);
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 3px rgba(53, 106, 106, 0.09);
+}
+
+.progressTrack::before {
+  left: -1px;
+}
+
+.progressTrack::after {
+  right: -1px;
+  border-color: var(--voyage-gold);
+}
+
+.progressFill {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--sea), #5c8b86, var(--voyage-gold));
+  box-shadow: 0 0 10px rgba(53, 106, 106, 0.24);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.shipMarker {
+  position: absolute;
+  top: 50%;
+  left: clamp(22px, var(--voyage-progress), calc(100% - 22px));
+  z-index: 4;
+  display: block;
+  width: clamp(46px, 4.8vw, 58px);
+  color: var(--sea-deep);
+  filter: drop-shadow(0 5px 5px rgba(35, 72, 74, 0.2));
+  transform: translate(-50%, -73%);
+  pointer-events: none;
+}
+
+.shipMarker::before {
+  content: "";
+  position: absolute;
+  left: -29px;
+  bottom: 5px;
+  width: 34px;
+  height: 7px;
+  background: repeating-radial-gradient(
+    ellipse at 100% 50%,
+    transparent 0 4px,
+    rgba(53, 106, 106, 0.28) 4.5px 5.5px,
+    transparent 6px 9px
+  );
+  opacity: 0.75;
+}
+
+.shipMarker svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: shipBob 2.8s ease-in-out infinite;
+}
+
+.shipWake {
+  fill: none;
+  stroke: rgba(53, 106, 106, 0.48);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.shipMast {
+  fill: none;
+  stroke: #3f2c1f;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.shipSailMain {
+  fill: #d6aa52;
+  stroke: #8f6728;
+  stroke-width: 1;
+}
+
+.shipSailRear {
+  fill: #f0dfbc;
+  stroke: #8f6728;
+  stroke-width: 1;
+}
+
+.shipHull {
+  fill: var(--sea-deep);
+  stroke: #183536;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+.shipTrim {
+  fill: none;
+  stroke: #e0b65e;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+@keyframes shipBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.8deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(0.8deg);
+  }
+}
+
+/* ── Entrance motion ── */
+.fadeUp {
+  opacity: 0;
+  clip-path: inset(0 0 22% 0);
+  transform: translateY(20px);
+  transition:
+    opacity var(--motion-duration-base) var(--motion-ease-out),
+    transform var(--motion-duration-slow) var(--motion-ease-out),
+    clip-path var(--motion-duration-slow) var(--motion-ease-out);
+}
+
+.fadeUp.visible {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transform: translateY(0);
+}
+
+.track .col {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition:
+    opacity 0.65s var(--motion-ease-soft),
+    transform 0.85s var(--motion-ease-out);
+}
+
+.track .colBottom {
+  transform: translateY(20px);
+}
+
+.track.visible .col {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.track .col:nth-child(1) {
+  transition-delay: 0.08s;
+}
+.track .col:nth-child(2) {
+  transition-delay: 0.14s;
+}
+.track .col:nth-child(3) {
+  transition-delay: 0.2s;
+}
+.track .col:nth-child(4) {
+  transition-delay: 0.26s;
+}
+.track .col:nth-child(n + 5) {
+  transition-delay: 0.32s;
+}
+
+.track .axisLine {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.9s var(--motion-ease-out);
+}
+
+.track.visible .axisLine {
+  transform: scaleX(1);
+}
+
+.track .node {
+  opacity: 0;
+  transform: translateY(-50%) scale(0.72) rotate(-12deg);
+  transition:
+    opacity 0.45s var(--motion-ease-soft),
+    transform 0.72s var(--motion-ease-out);
+}
+
+.track.visible .node {
+  opacity: 1;
+  transform: translateY(-50%) scale(1) rotate(0);
+}
+
+.viewportFree:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: -3px;
+}
+
 .delay1 {
-  transition-delay: 0.06s;
+  transition-delay: 0.04s;
 }
 .delay2 {
-  transition-delay: 0.16s;
+  transition-delay: 0.12s;
 }
 .delay3 {
-  transition-delay: 0.26s;
+  transition-delay: 0.22s;
 }
 
 @media (max-width: 900px) {
+  .viewportPinned {
+    mask-image: linear-gradient(90deg, transparent 0, #000 2%, #000 98%, transparent 100%);
+  }
+
   .track {
     --col: min(76vw, 290px);
     padding: 0 clamp(14px, 4vw, 36px);
   }
 
-  .progressTrack {
-    margin: 0 clamp(14px, 4vw, 36px);
+  .voyageProgress {
+    margin-inline: clamp(14px, 4vw, 36px);
   }
 }
 
@@ -439,12 +790,66 @@
   .track {
     --col: min(80vw, 280px);
   }
+
+  .voyageProgress {
+    height: 23px;
+  }
+
+  .progressLabels {
+    display: none;
+  }
+
+  .progressTrack {
+    top: 7px;
+  }
+
+  .shipMarker {
+    width: 44px;
+  }
+}
+
+@media (max-height: 650px) {
+  .stagePinned {
+    gap: 7px;
+    padding-top: clamp(68px, 9vh, 82px);
+    padding-bottom: 12px;
+  }
+
+  .voyageProgress {
+    height: 22px;
+  }
+
+  .progressLabels {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fadeUp {
+  .fadeUp,
+  .track .col,
+  .voyageProgress {
     opacity: 1;
+    clip-path: none;
     transform: none;
     transition: none;
+  }
+
+  .track .axisLine {
+    transform: none;
+    transition: none;
+  }
+
+  .track .node {
+    opacity: 1;
+    transform: translateY(-50%);
+    transition: none;
+  }
+
+  .shipMarker svg {
+    animation: none;
+  }
+
+  .card:hover {
+    transform: none;
   }
 }
