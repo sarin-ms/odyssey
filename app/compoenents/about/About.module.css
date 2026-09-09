@@ -267,44 +267,127 @@
   max-width: 105px;
 }
 
-/* ── Entrance Animations ── */
+/* ── Editorial section reveals ── */
+@keyframes statSettle {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .fadeUp {
   opacity: 0;
-  transform: translateY(28px);
+  clip-path: inset(0 0 16% 0);
+  transform: translateY(22px);
+  filter: blur(2px);
   transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity var(--motion-duration-base) var(--motion-ease-out),
+    transform var(--motion-duration-slow) var(--motion-ease-out),
+    clip-path var(--motion-duration-slow) var(--motion-ease-out),
+    filter var(--motion-duration-base) var(--motion-ease-soft);
+}
+
+.leftCol .fadeUp {
+  transform: translateX(-30px);
+}
+
+.rightCol .fadeUp {
+  transform: translateX(30px);
 }
 
 .fadeUp.visible {
   opacity: 1;
-  transform: translateY(0);
+  clip-path: inset(0 0 0 0);
+  transform: translate(0, 0);
+  filter: blur(0);
+}
+
+.fadeUp .badgeLine {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.8s var(--motion-ease-out) 0.28s;
+}
+
+.fadeUp.visible .badgeLine {
+  transform: scaleX(1);
 }
 
 .fadeScale {
   opacity: 0;
-  transform: translateX(-50%) scale(0.96);
+  clip-path: circle(0% at 42% 58%);
+  filter: saturate(0.72);
   transition:
-    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.45s var(--motion-ease-soft),
+    clip-path 1.15s var(--motion-ease-out),
+    filter 1s var(--motion-ease-soft);
 }
 
 .fadeScale.visible {
   opacity: 1;
-  transform: translateX(-50%) scale(1);
+  clip-path: circle(78% at 42% 58%);
+  filter: saturate(1);
+}
+
+.statsCard.visible .statItem {
+  animation: statSettle 0.65s var(--motion-ease-out) both;
+}
+
+.statsCard.visible .statItem:nth-child(1) {
+  animation-delay: 0.28s;
+}
+
+.statsCard.visible .statItem:nth-child(2) {
+  animation-delay: 0.36s;
+}
+
+.statsCard.visible .statItem:nth-child(3) {
+  animation-delay: 0.44s;
+}
+
+.statsCard.visible .statItem:nth-child(4) {
+  animation-delay: 0.52s;
+}
+
+.statsCard:hover,
+.statItem:hover .iconCircle {
+  transform: none;
 }
 
 .delay1 {
-  transition-delay: 0.06s;
+  transition-delay: 0.04s;
 }
 .delay2 {
-  transition-delay: 0.16s;
+  transition-delay: 0.12s;
 }
 .delay3 {
-  transition-delay: 0.26s;
+  transition-delay: 0.22s;
 }
 .delay4 {
-  transition-delay: 0.36s;
+  transition-delay: 0.32s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fadeUp,
+  .fadeScale {
+    opacity: 1;
+    clip-path: none;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .fadeUp .badgeLine {
+    transform: none;
+    transition: none;
+  }
+
+  .statsCard.visible .statItem {
+    animation: none;
+  }
 }
 
 /* ── Responsive Adaptations ── */

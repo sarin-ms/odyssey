@@ -6,6 +6,7 @@ import Prizepool from "./compoenents/prizepool/Prizepool";
 import Structure from "./compoenents/structure/Structure";
 import Schedule from "./compoenents/schedule/Schedule";
 import Partners from "./compoenents/partners/Partners";
+import FAQ from "./compoenents/faq/FAQ";
 import Footer from "./compoenents/footer/Footer";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <Structure />
       <Schedule />
       <Partners />
+      <FAQ />
       <Footer />
     </main>
   );

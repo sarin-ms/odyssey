@@ -1,10 +1,10 @@
 .footer {
+  --footer-art-height: clamp(190px, 16vw, 268px);
   position: relative;
   z-index: 10;
   isolation: isolate;
   width: 100%;
   overflow: hidden;
-  
   background: linear-gradient(90deg, #f1eade 0%, #efe7d9 62%, #efe7d8 100%);
   padding: clamp(24px, 3.6vw, 42px) clamp(20px, 5vw, 64px) clamp(12px, 1.5vw, 17px);
   min-height: clamp(200px, 16vw, 268px);
@@ -14,30 +14,50 @@
 
 .bg {
   position: absolute;
-  inset: 0;
-  z-index: -2;
-}
-
-.bgImage {
-  object-fit: contain;
-  object-position: 100% 50%;
+  inset: auto 0 0;
+  z-index: 0;
+  height: var(--footer-art-height);
+  overflow: hidden;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      180deg,
+      #efe7d8 0%,
+      rgba(239, 231, 216, 0.78) 14%,
+      rgba(239, 231, 216, 0.24) 42%,
+      transparent 66%
+    ),
+    linear-gradient(
+      90deg,
+      #f1eade 0%,
+      rgba(241, 234, 222, 0.96) 28%,
+      rgba(241, 234, 222, 0.58) 48%,
+      transparent 72%
+    ),
+    url("/assets/footer_bg.webp");
+  background-repeat: no-repeat;
+  background-position: center, center, 100% 50%;
+  background-size: 100% 100%, 100% 100%, cover;
 }
 
 .scrim {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 1;
+  pointer-events: none;
   background: linear-gradient(
     90deg,
-    rgba(242, 235, 223, 0.94) 0%,
-    rgba(242, 235, 223, 0.8) 34%,
-    rgba(242, 235, 223, 0.28) 54%,
-    rgba(242, 235, 223, 0) 68%
+    rgba(242, 235, 223, 0.78) 0%,
+    rgba(242, 235, 223, 0.7) 34%,
+    rgba(242, 235, 223, 0.44) 48%,
+    rgba(242, 235, 223, 0.14) 62%,
+    rgba(242, 235, 223, 0) 76%
   );
 }
 
 .inner {
   position: relative;
+  z-index: 2;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
@@ -259,9 +279,9 @@
     display: none;
   }
 
-  .bgImage {
-    object-fit: cover;
-    object-position: 78% 50%;
+  .bg {
+    height: clamp(190px, 27vw, 230px);
+    background-position: center, center, 82% 50%;
   }
 
   .scrim {
@@ -312,6 +332,8 @@
   .bgImage {
     object-fit: cover;
     object-position: 18% 50%;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .scrim {

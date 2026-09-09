@@ -110,7 +110,7 @@ export default function About() {
               alt="Wooden Trojan horse sculpture"
               width={1122}
               height={1402}
-              priority
+              sizes="(min-width: 1041px) 36vw, 0px"
               className={styles.horseImage}
             />
           </div>

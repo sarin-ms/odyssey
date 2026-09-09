@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import styles from "./Hero.module.css";
 import horseImg from "@/public/assets/horse_half.png";
@@ -15,7 +13,7 @@ export default function Hero() {
               src={heroBg}
               alt="Desert landscape with mountains and sun"
               fill
-              priority
+              fetchPriority="high"
               className={styles.heroBgImage}
               sizes="100vw"
             />
@@ -24,17 +22,17 @@ export default function Hero() {
           <div className={styles.heroContent}>
             <div className={styles.heroText}>
               <p
-                className={`${styles.heroSubtitle} ${styles.animFadeUp} ${styles.animDelay1}`}
+                className={`${styles.heroSubtitle} ${styles.animReveal} ${styles.animDelay1}`}
               >
                 IEDC BOOTCAMP CEC × μLEARN CHN
               </p>
               <h1
-                className={`${styles.heroTitle} ${styles.animFadeUp} ${styles.animDelay2}`}
+                className={`${styles.heroTitle} ${styles.animReveal} ${styles.animDelay2}`}
               >
                 ODYSSEY
               </h1>
               <p
-                className={`${styles.heroTagline} ${styles.animFadeUp} ${styles.animDelay3}`}
+                className={`${styles.heroTagline} ${styles.animReveal} ${styles.animDelay3}`}
               >
                 ENDLESS POSSIBILITIES.
                 <br />
@@ -43,12 +41,17 @@ export default function Hero() {
 
               <a
                 href="#register"
-                className={`${styles.heroCtaPlaque} ${styles.animFadeUp} ${styles.animDelay4}`}
+                className={`${styles.heroCtaPlaque} ${styles.animReveal} ${styles.animDelay4}`}
               >
                 <div className={styles.plaqueOuter}>
                   <div className={styles.plaqueInner}>
                     <span className={styles.plaqueStar}>
-                      <img src="/assets/star.png" alt="" width={24} height={24}/>
+                      <Image
+                        src="/assets/star.png"
+                        alt=""
+                        width={24}
+                        height={24}
+                      />
                     </span>
                     <span className={styles.plaqueDivider} />
                     <span className={styles.plaqueText}>REGISTER NOW</span>
@@ -58,17 +61,25 @@ export default function Hero() {
               </a>
             </div>
 
-            <div
-              className={`${styles.heroImageWrapper} ${styles.animFadeRight}`}
-            >
-              <div className={styles.horseHalo} />
+            <div className={styles.heroImageWrapper}>
+              <div className={styles.horseHalo} aria-hidden="true" />
               <Image
                 src={horseImg}
                 alt="Trojan horse wooden sculpture"
-                priority
+                loading="eager"
+                sizes="(max-width: 768px) 85vw, (max-width: 1024px) 400px, 55vw"
                 className={styles.horseImage}
               />
             </div>
+          </div>
+
+          <div
+            className={`${styles.journeyMarker} ${styles.animReveal} ${styles.animDelay5}`}
+            aria-hidden="true"
+          >
+            <span className={styles.markerIndex}>01</span>
+            <span className={styles.markerLine} />
+            <span className={styles.markerLabel}>Begin the journey</span>
           </div>
         </section>
       </div>

@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { label: "Structure", href: "#structure" },
   { label: "Schedule", href: "#schedule" },
   { label: "Partners", href: "#partners" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export default function Navbar() {

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import styles from "./Footer.module.css";
 
 const stroke = {
@@ -87,15 +86,7 @@ const SOCIALS = [
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.bg} aria-hidden="true">
-        <Image
-          src="/assets/footer_bg.webp"
-          alt=""
-          fill
-          sizes="100vw"
-          className={styles.bgImage}
-        />
-      </div>
+      <div className={styles.bg} aria-hidden="true" />
       <span className={styles.scrim} aria-hidden="true" />
 
       <div className={styles.inner}>

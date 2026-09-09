@@ -3,30 +3,41 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Structure.module.css";
 
+const iconProps = {
+  width: 30,
+  height: 30,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.7,
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  "aria-hidden": true,
+};
+
 const SearchIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+  <svg {...iconProps}>
     <circle cx="11" cy="11" r="8" />
     <path d="m21 21-4.35-4.35" />
   </svg>
 );
 
 const LightbulbIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+  <svg {...iconProps}>
     <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
-    <path d="M9 18h6" />
-    <path d="M10 22h4" />
+    <path d="M9 18h6M10 22h4" />
   </svg>
 );
 
 const CodeIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+  <svg {...iconProps}>
     <polyline points="16 18 22 12 16 6" />
     <polyline points="8 6 2 12 8 18" />
   </svg>
 );
 
 const PresentationIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+  <svg {...iconProps}>
     <path d="M2 3h20" />
     <path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" />
     <path d="m7 21 5-5 5 5" />
@@ -39,42 +50,49 @@ const PHASES = [
     number: "01",
     title: "Discover",
     subtitle: "Problem Identification",
+    bearing: "Observe · Research",
     description:
-      "Begin by identifying real-world problems that matter. Research the context, understand the people affected, and explore the landscape of existing solutions.",
+      "Begin with a real problem worth solving. Study its context, listen to the people affected, and chart the landscape of existing solutions.",
     icon: <SearchIcon />,
-    color: "#7a5426",
+    color: "#8a5d32",
   },
   {
     id: "ideate",
     number: "02",
     title: "Ideate",
     subtitle: "Solution Design",
+    bearing: "Imagine · Validate",
     description:
-      "Brainstorm potential solutions, validate your ideas through feedback, refine your approach, and create a clear roadmap for implementation.",
+      "Explore possible routes, test assumptions through feedback, and turn the strongest direction into a clear plan for implementation.",
     icon: <LightbulbIcon />,
-    color: "#8b6914",
+    color: "#b18431",
   },
   {
     id: "develop",
     number: "03",
     title: "Develop",
     subtitle: "Build & Iterate",
+    bearing: "Build · Refine",
     description:
-      "Bring your solution to life through hands-on development. Build a functional prototype, iterate based on testing, and refine the user experience.",
+      "Bring the chosen route to life as a functional prototype. Test, iterate, and strengthen both the technology and the experience.",
     icon: <CodeIcon />,
-    color: "#3d6b3d",
+    color: "#477260",
   },
   {
     id: "demonstrate",
     number: "04",
     title: "Demonstrate",
     subtitle: "Present & Pitch",
+    bearing: "Show · Impact",
     description:
-      "Showcase your solution to judges and peers. Present the problem, demonstrate your prototype, and articulate the impact your solution can create.",
+      "Arrive with a compelling story. Demonstrate the prototype, explain the journey, and show the real-world impact the solution can create.",
     icon: <PresentationIcon />,
-    color: "#2b7a9c",
+    color: "#356a6a",
   },
 ];
+
+const ROUTE_PATH =
+  "M 165 158 C 350 42, 820 44, 1035 158 C 1150 252, 1152 430, 1035 502 C 805 622, 390 622, 165 502";
 
 export default function Structure() {
   const sectionRef = useRef(null);
@@ -83,9 +101,7 @@ export default function Structure() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-        }
+        if (entry.isIntersecting) setVisible(true);
       },
       { threshold: 0.12 },
     );
@@ -101,50 +117,103 @@ export default function Structure() {
       className={styles.structureSection}
       id="structure"
       ref={sectionRef}
+      aria-labelledby="structure-title"
     >
       <div className={styles.structureInner}>
-        <div className={styles.header}>
+        <header className={styles.header}>
           <div
             className={`${styles.badgeWrapper} ${styles.fadeUp} ${v} ${styles.delay1}`}
           >
-            <span className={styles.badgeText}>THE PROCESS</span>
+            <span className={styles.badgeText}>THE NAVIGATION CHART</span>
             <span className={styles.badgeLine} />
           </div>
+
           <h2
+            id="structure-title"
             className={`${styles.sectionTitle} ${styles.fadeUp} ${v} ${styles.delay2}`}
           >
-            <span className={styles.titleLineOne}>Event</span>
-            <span className={styles.titleLineTwo}>Structure</span>
+            <span>Four Waypoints.</span>
+            <span className={styles.titleAccent}>One Odyssey.</span>
           </h2>
+
           <p
             className={`${styles.subtitle} ${styles.fadeUp} ${v} ${styles.delay3}`}
           >
-            A structured framework guiding teams from problem to solution
+            Every team navigates the same four bearings—from a problem worth
+            solving to a solution worth sharing.
           </p>
+        </header>
+
+        <div className={`${styles.chart} ${v}`}>
+          <svg
+            className={styles.routeMap}
+            viewBox="0 0 1200 650"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path className={styles.routeShadow} d={ROUTE_PATH} />
+            <path
+              className={styles.routeLine}
+              d={ROUTE_PATH}
+              pathLength="1"
+            />
+            <circle className={styles.routePort} cx="165" cy="158" r="7" />
+            <circle className={styles.routePort} cx="1035" cy="158" r="7" />
+            <circle className={styles.routePort} cx="1035" cy="502" r="7" />
+            <circle className={styles.routePort} cx="165" cy="502" r="7" />
+          </svg>
+
+          <div className={styles.compassRose} aria-hidden="true">
+            <span className={styles.north}>N</span>
+            <span className={styles.east}>E</span>
+            <span className={styles.south}>S</span>
+            <span className={styles.west}>W</span>
+            <span className={styles.compassDial}>
+              <span className={styles.compassNeedle} />
+              <span className={styles.compassCore} />
+            </span>
+          </div>
+
+          {PHASES.map((phase, index) => (
+            <article
+              key={phase.id}
+              className={`${styles.waypoint} ${styles[`waypoint${index + 1}`]} ${v}`}
+              style={{ "--phase-color": phase.color }}
+            >
+              <div className={styles.waypointMarker} aria-hidden="true">
+                <span className={styles.markerIcon}>{phase.icon}</span>
+                <span className={styles.markerNumber}>{phase.number}</span>
+              </div>
+
+              <div className={styles.waypointPanel}>
+                <div className={styles.waypointMeta}>
+                  <span>Waypoint {phase.number}</span>
+                  <span>{phase.bearing}</span>
+                </div>
+                <h3 className={styles.phaseTitle}>{phase.title}</h3>
+                <p className={styles.phaseSubtitle}>{phase.subtitle}</p>
+                <p className={styles.phaseDescription}>{phase.description}</p>
+              </div>
+            </article>
+          ))}
         </div>
 
-        <div className={styles.phasesContainer}>
-          {PHASES.map((phase, index) => (
-            <div
-              key={phase.id}
-              className={`${styles.phaseCard} ${styles.fadeUp} ${v} ${styles[`delay${index + 4}`]}`}
-            >
-              <div className={styles.phaseNumber}>{phase.number}</div>
-              <div
-                className={styles.phaseIcon}
-                style={{ color: phase.color }}
-              >
-                {phase.icon}
-              </div>
-              <h3 className={styles.phaseTitle}>{phase.title}</h3>
-              <div className={styles.phaseSubtitle}>{phase.subtitle}</div>
-              <p className={styles.phaseDescription}>{phase.description}</p>
-              <div
-                className={styles.phaseAccent}
-                style={{ background: phase.color }}
-              />
-            </div>
-          ))}
+        <div
+          className={`${styles.journeyKey} ${styles.fadeUp} ${v} ${styles.delay8}`}
+        >
+          <div className={styles.keyPoint}>
+            <span className={styles.keyLabel}>Departure</span>
+            <span className={styles.keyValue}>A problem worth solving</span>
+          </div>
+          <div className={styles.keyRoute} aria-hidden="true">
+            <span>✦</span>
+            <span className={styles.keyLine} />
+            <span>➜</span>
+          </div>
+          <div className={`${styles.keyPoint} ${styles.keyPointEnd}`}>
+            <span className={styles.keyLabel}>Destination</span>
+            <span className={styles.keyValue}>Measurable real-world impact</span>
+          </div>
         </div>
       </div>
     </section>

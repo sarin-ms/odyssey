@@ -1,0 +1,805 @@
+.faqSection {
+  --faq-sea: #356a6a;
+  --faq-deep: #23484a;
+  --faq-gold: #b18431;
+  --faq-ink: #293a34;
+  position: relative;
+  z-index: 10;
+  isolation: isolate;
+  width: 100%;
+  padding: clamp(78px, 10vw, 132px) clamp(18px, 5vw, 64px) clamp(84px, 10vw, 124px);
+  overflow: hidden;
+  scroll-margin-top: 82px;
+  background:
+    radial-gradient(circle at 12% 30%, rgba(53, 106, 106, 0.09), transparent 24%),
+    radial-gradient(circle at 89% 68%, rgba(177, 132, 49, 0.08), transparent 25%),
+    linear-gradient(180deg, var(--color-cream) 0%, #f1e9de 72%, #efe7da 100%);
+}
+
+.faqSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  opacity: 0.42;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 47px, rgba(53, 106, 106, 0.035) 48px 49px),
+    repeating-linear-gradient(90deg, transparent 0 47px, rgba(53, 106, 106, 0.035) 48px 49px);
+  mask-image: linear-gradient(90deg, #000, transparent 52%, #000);
+  pointer-events: none;
+}
+
+.faqSection::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(122, 84, 38, 0.22), transparent);
+}
+
+.chartArcOne,
+.chartArcTwo {
+  position: absolute;
+  z-index: -1;
+  border: 1px solid rgba(53, 106, 106, 0.1);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.chartArcOne {
+  top: 8%;
+  left: -180px;
+  width: 430px;
+  height: 430px;
+  box-shadow:
+    0 0 0 28px rgba(53, 106, 106, 0.025),
+    0 0 0 70px rgba(53, 106, 106, 0.018);
+}
+
+.chartArcTwo {
+  right: -145px;
+  bottom: 6%;
+  width: 360px;
+  height: 360px;
+  border-color: rgba(177, 132, 49, 0.1);
+  box-shadow:
+    0 0 0 34px rgba(177, 132, 49, 0.025),
+    0 0 0 78px rgba(177, 132, 49, 0.018);
+}
+
+.faqInner {
+  display: grid;
+  grid-template-columns: minmax(285px, 0.72fr) minmax(0, 1.48fr);
+  gap: clamp(54px, 7vw, 108px);
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* ── Sticky voyage briefing ── */
+.briefing {
+  position: sticky;
+  top: 110px;
+  align-self: start;
+  min-width: 0;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  font-family: var(--font-label);
+  font-size: clamp(0.63rem, 1.2vw, 0.72rem);
+  font-weight: 650;
+  letter-spacing: 0.22em;
+  color: var(--faq-deep);
+}
+
+.eyebrowLine {
+  position: relative;
+  width: 54px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--faq-sea), var(--faq-gold));
+}
+
+.eyebrowLine::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--faq-gold);
+  transform: translateY(-50%);
+}
+
+.sectionTitle {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  font-family: var(--font-display);
+  font-size: clamp(2.55rem, 5vw, 4.7rem);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: 0.015em;
+  color: var(--faq-ink);
+  text-wrap: balance;
+}
+
+.sectionTitle span {
+  color: var(--faq-sea);
+  font-size: 0.86em;
+  letter-spacing: 0.045em;
+}
+
+.intro {
+  max-width: 39ch;
+  font-family: var(--font-serif);
+  font-size: clamp(0.91rem, 1.6vw, 1.02rem);
+  font-style: italic;
+  line-height: 1.7;
+  color: #56665f;
+}
+
+.chartCard {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(118px, 0.78fr) minmax(0, 1fr);
+  grid-template-areas:
+    "compass motto"
+    "facts facts";
+  align-items: center;
+  gap: 16px clamp(15px, 2vw, 24px);
+  margin-top: clamp(30px, 4vw, 46px);
+  padding: clamp(20px, 2.5vw, 28px);
+  border: 1px solid rgba(53, 106, 106, 0.2);
+  background:
+    linear-gradient(rgba(53, 106, 106, 0.028) 1px, transparent 1px) 0 0 / 100% 20px,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.64), rgba(238, 225, 207, 0.82));
+  clip-path: polygon(0 0, calc(100% - 17px) 0, 100% 17px, 100% 100%, 17px 100%, 0 calc(100% - 17px));
+  box-shadow:
+    0 12px 34px rgba(35, 72, 74, 0.07),
+    inset 0 0 36px rgba(122, 84, 38, 0.025);
+}
+
+.chartCard::before,
+.chartCard::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.chartCard::before {
+  top: 0;
+  left: 0;
+  width: 42%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--faq-sea), transparent);
+}
+
+.chartCard::after {
+  right: 11px;
+  bottom: 10px;
+  width: 32px;
+  height: 32px;
+  border-right: 1px solid rgba(177, 132, 49, 0.34);
+  border-bottom: 1px solid rgba(177, 132, 49, 0.34);
+}
+
+.compass {
+  position: relative;
+  grid-area: compass;
+  width: min(100%, 138px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  border: 1px dashed rgba(53, 106, 106, 0.38);
+  border-radius: 50%;
+  color: var(--faq-deep);
+}
+
+.compass::before,
+.compass::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.compass::before {
+  inset: 10%;
+  border: 1px solid rgba(53, 106, 106, 0.22);
+}
+
+.compass::after {
+  inset: 27%;
+  border: 1px solid rgba(177, 132, 49, 0.42);
+  box-shadow: 0 0 0 7px rgba(177, 132, 49, 0.035);
+}
+
+.compassNorth,
+.compassEast,
+.compassSouth,
+.compassWest {
+  position: absolute;
+  z-index: 3;
+  font-family: var(--font-label);
+  font-size: 0.51rem;
+  font-weight: 750;
+  line-height: 1;
+}
+
+.compassNorth {
+  top: 5px;
+  left: 50%;
+  color: var(--faq-gold);
+  transform: translateX(-50%);
+}
+
+.compassEast {
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+}
+
+.compassSouth {
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.compassWest {
+  top: 50%;
+  left: 6px;
+  transform: translateY(-50%);
+}
+
+.compassTicks {
+  position: absolute;
+  inset: 16%;
+  border-radius: 50%;
+  background: repeating-conic-gradient(rgba(53, 106, 106, 0.38) 0 1deg, transparent 1deg 15deg);
+}
+
+.compassNeedle {
+  position: absolute;
+  inset: 22%;
+  z-index: 2;
+  background: conic-gradient(from 45deg, transparent 0 12.5%, rgba(53, 106, 106, 0.25) 12.5% 25%, transparent 25% 37.5%, rgba(177, 132, 49, 0.82) 37.5% 50%, transparent 50% 62.5%, rgba(53, 106, 106, 0.25) 62.5% 75%, transparent 75% 87.5%, var(--faq-deep) 87.5% 100%);
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  transform: rotate(12deg);
+}
+
+.compassPin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 4;
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--faq-gold);
+  border-radius: 50%;
+  background: #efe5d8;
+  transform: translate(-50%, -50%);
+}
+
+.compassMotto {
+  grid-area: motto;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  line-height: 1.25;
+  color: #354a42;
+}
+
+.voyageFacts {
+  grid-area: facts;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 3px 0 0;
+  border-top: 1px solid rgba(53, 106, 106, 0.14);
+}
+
+.voyageFacts div {
+  min-width: 0;
+  padding: 12px 10px 0;
+}
+
+.voyageFacts div:nth-child(odd) {
+  padding-left: 0;
+  border-right: 1px solid rgba(53, 106, 106, 0.12);
+}
+
+.voyageFacts dt {
+  margin-bottom: 3px;
+  font-family: var(--font-label);
+  font-size: 0.49rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--faq-gold);
+  text-transform: uppercase;
+}
+
+.voyageFacts dd {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(0.72rem, 1.3vw, 0.82rem);
+  font-weight: 600;
+  color: #40534c;
+}
+
+/* ── Navigator's archive ── */
+.archive {
+  min-width: 0;
+}
+
+.archiveHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 18px;
+  padding: 0 5px 15px;
+  border-bottom: 1px solid rgba(53, 106, 106, 0.18);
+}
+
+.archiveKicker {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-label);
+  font-size: clamp(0.68rem, 1.4vw, 0.78rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--faq-deep);
+  text-transform: uppercase;
+}
+
+.archiveHeader p {
+  font-family: var(--font-serif);
+  font-size: clamp(0.78rem, 1.4vw, 0.88rem);
+  font-style: italic;
+  color: #69766f;
+}
+
+.dispatchCount {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  flex-shrink: 0;
+  font-family: var(--font-label);
+  font-size: 0.52rem;
+  font-weight: 650;
+  letter-spacing: 0.11em;
+  color: #718079;
+  text-transform: uppercase;
+}
+
+.dispatchCount strong {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: var(--faq-gold);
+  line-height: 1;
+}
+
+.faqList {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.faqList::before {
+  content: "";
+  position: absolute;
+  top: 31px;
+  bottom: 31px;
+  left: 31px;
+  z-index: 0;
+  width: 1px;
+  background: repeating-linear-gradient(180deg, rgba(53, 106, 106, 0.38) 0 6px, transparent 6px 11px);
+  pointer-events: none;
+}
+
+.faqItem {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border: 1px solid rgba(64, 88, 80, 0.19);
+  border-radius: 2px 13px 2px 13px;
+  background:
+    linear-gradient(rgba(53, 106, 106, 0.018) 1px, transparent 1px) 0 0 / 100% 20px,
+    rgba(249, 244, 236, 0.78);
+  box-shadow: 0 6px 18px rgba(35, 72, 74, 0.035);
+  transition:
+    border-color var(--motion-duration-fast) ease,
+    background var(--motion-duration-fast) ease,
+    box-shadow var(--motion-duration-fast) ease;
+}
+
+.faqItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background: linear-gradient(var(--faq-gold), var(--faq-sea));
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 0.5s var(--motion-ease-out);
+}
+
+.faqItem[open] {
+  border-color: rgba(53, 106, 106, 0.36);
+  background:
+    linear-gradient(rgba(53, 106, 106, 0.025) 1px, transparent 1px) 0 0 / 100% 20px,
+    rgba(249, 244, 236, 0.94);
+  box-shadow: 0 12px 28px rgba(35, 72, 74, 0.08);
+}
+
+.faqItem[open]::before {
+  transform: scaleY(1);
+}
+
+.questionRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 36px;
+  align-items: center;
+  gap: 15px;
+  min-height: 78px;
+  padding: 13px clamp(15px, 2.2vw, 22px) 13px 8px;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.questionRow::-webkit-details-marker {
+  display: none;
+}
+
+.questionRow::marker {
+  content: "";
+}
+
+.questionRow:focus-visible {
+  outline: 2px solid var(--faq-gold);
+  outline-offset: -4px;
+}
+
+.logNumber {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  justify-self: center;
+  border: 1px solid rgba(53, 106, 106, 0.44);
+  border-radius: 50%;
+  background: #f4ecdf;
+  box-shadow:
+    0 0 0 4px #f7f0e6,
+    0 4px 10px rgba(35, 72, 74, 0.11);
+  font-family: var(--font-label);
+  font-size: 0.59rem;
+  font-weight: 750;
+  color: var(--faq-sea);
+  font-variant-numeric: tabular-nums;
+  transition:
+    color var(--motion-duration-fast) ease,
+    background var(--motion-duration-fast) ease,
+    border-color var(--motion-duration-fast) ease;
+}
+
+.logNumber::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px dashed rgba(53, 106, 106, 0.24);
+  border-radius: 50%;
+}
+
+.faqItem[open] .logNumber {
+  border-color: var(--faq-deep);
+  background: var(--faq-deep);
+  color: #fbf4e8;
+}
+
+.questionCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.category {
+  font-family: var(--font-label);
+  font-size: clamp(0.49rem, 1.05vw, 0.57rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--faq-gold);
+  text-transform: uppercase;
+}
+
+.question {
+  font-family: var(--font-display);
+  font-size: clamp(1.06rem, 2vw, 1.28rem);
+  line-height: 1.22;
+  letter-spacing: 0.018em;
+  color: #30433c;
+  text-wrap: pretty;
+}
+
+.toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(53, 106, 106, 0.27);
+  border-radius: 50%;
+  color: var(--faq-sea);
+  transition:
+    transform 0.42s var(--motion-ease-out),
+    border-color var(--motion-duration-fast) ease,
+    background var(--motion-duration-fast) ease;
+}
+
+.toggle::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px dashed rgba(53, 106, 106, 0.2);
+  border-radius: 50%;
+}
+
+.toggle span {
+  position: absolute;
+  z-index: 1;
+  width: 11px;
+  height: 1px;
+  background: currentColor;
+}
+
+.toggle span:last-child {
+  transform: rotate(90deg);
+}
+
+.faqItem[open] .toggle {
+  border-color: var(--faq-gold);
+  background: rgba(177, 132, 49, 0.08);
+  color: var(--faq-gold);
+  transform: rotate(45deg);
+}
+
+.answer {
+  padding: 0 clamp(20px, 3vw, 34px) clamp(22px, 3vw, 30px) 71px;
+}
+
+.answerInner {
+  padding: 18px 18px 0 0;
+  border-top: 1px solid rgba(53, 106, 106, 0.14);
+  font-family: var(--font-body);
+  font-size: clamp(0.83rem, 1.45vw, 0.93rem);
+  line-height: 1.72;
+  color: #4a5a53;
+  animation: revealDispatch 0.45s var(--motion-ease-out) both;
+}
+
+.answerInner strong {
+  color: #354a42;
+}
+
+.address {
+  margin-top: 8px;
+  padding-left: 14px;
+  border-left: 2px solid var(--faq-gold);
+  font-style: normal;
+  font-weight: 600;
+  color: #354a42;
+}
+
+.criteriaList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 20px;
+  margin: 13px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.criteriaList li {
+  position: relative;
+  padding-left: 17px;
+}
+
+.criteriaList li::before {
+  content: "";
+  position: absolute;
+  top: 0.62em;
+  left: 1px;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--faq-sea);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.archiveFooter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 18px 5px 0;
+  border-top: 1px solid rgba(53, 106, 106, 0.17);
+  font-family: var(--font-serif);
+  font-size: clamp(0.8rem, 1.4vw, 0.9rem);
+  font-style: italic;
+  color: #627069;
+}
+
+.archiveFooter a {
+  color: var(--faq-deep);
+  font-weight: 600;
+  text-decoration-color: rgba(53, 106, 106, 0.38);
+  text-underline-offset: 3px;
+}
+
+.archiveStar {
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  flex-shrink: 0;
+  border: 1px solid rgba(177, 132, 49, 0.42);
+  border-radius: 50%;
+  color: var(--faq-gold);
+}
+
+@keyframes revealDispatch {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1100px) {
+  .faqInner {
+    grid-template-columns: minmax(250px, 0.62fr) minmax(0, 1.38fr);
+    gap: 42px;
+  }
+
+  .chartCard {
+    grid-template-columns: 105px minmax(0, 1fr);
+    padding: 20px;
+  }
+}
+
+@media (max-width: 880px) {
+  .faqInner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .briefing {
+    position: relative;
+    top: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+    align-items: center;
+    gap: 34px;
+  }
+
+  .chartCard {
+    margin-top: 0;
+  }
+
+  .intro {
+    max-width: 48ch;
+  }
+}
+
+@media (max-width: 660px) {
+  .faqSection {
+    padding-inline: 16px;
+  }
+
+  .faqInner {
+    gap: 34px;
+  }
+
+  .briefing {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .chartCard {
+    display: none;
+  }
+
+  .archiveHeader {
+    align-items: flex-start;
+  }
+
+  .dispatchCount {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  .questionRow {
+    grid-template-columns: 44px minmax(0, 1fr) 30px;
+    gap: 10px;
+    min-height: 74px;
+    padding-right: 12px;
+  }
+
+  .faqList::before {
+    left: 28px;
+  }
+
+  .logNumber {
+    width: 34px;
+    height: 34px;
+  }
+
+  .toggle {
+    width: 29px;
+    height: 29px;
+  }
+
+  .answer {
+    padding: 0 16px 22px 62px;
+  }
+
+  .criteriaList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .sectionTitle {
+    font-size: clamp(2.35rem, 12vw, 3.1rem);
+  }
+
+  .chartCard {
+    grid-template-columns: 96px minmax(0, 1fr);
+    padding: 17px;
+  }
+
+  .voyageFacts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .voyageFacts div,
+  .voyageFacts div:nth-child(odd) {
+    padding: 9px 0 0;
+    border-right: 0;
+  }
+
+  .archiveHeader p {
+    max-width: 23ch;
+  }
+
+  .question {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faqItem,
+  .faqItem::before,
+  .logNumber,
+  .toggle {
+    transition: none;
+  }
+
+  .answerInner {
+    animation: none;
+  }
+}

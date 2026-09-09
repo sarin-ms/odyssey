@@ -279,37 +279,110 @@
   opacity: 0.9;
 }
 
-/* Animations */
+/* Partner plaques reveal directionally, then catch one restrained light pass. */
+@keyframes plaqueSweep {
+  from {
+    transform: skewX(-18deg) translateX(-260%);
+  }
+  to {
+    transform: skewX(-18deg) translateX(720%);
+  }
+}
+
 .fadeUp {
   opacity: 0;
-  transform: translateY(28px);
+  clip-path: inset(0 0 18% 0);
+  transform: translateY(22px);
   transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity var(--motion-duration-base) var(--motion-ease-out),
+    transform var(--motion-duration-slow) var(--motion-ease-out),
+    clip-path var(--motion-duration-slow) var(--motion-ease-out);
 }
 
 .fadeUp.visible {
   opacity: 1;
+  clip-path: inset(0 0 0 0);
   transform: translateY(0);
 }
 
+.partnersGrid.fadeUp {
+  transform: none;
+}
+
+.partnerCategory {
+  opacity: 0;
+  transform: translateX(-34px);
+  transition:
+    opacity 0.7s var(--motion-ease-soft),
+    transform 0.95s var(--motion-ease-out);
+}
+
+.partnerCategory:nth-child(even) {
+  transform: translateX(34px);
+}
+
+.partnersGrid.visible .partnerCategory {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.partnersGrid.visible .partnerCategory:nth-child(1) {
+  transition-delay: 0.08s;
+}
+
+.partnersGrid.visible .partnerCategory:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.logoPlaque {
+  position: relative;
+  overflow: hidden;
+}
+
+.logoPlaque::after {
+  content: "";
+  position: absolute;
+  inset: -45% auto -45% -30%;
+  width: 22%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 162, 74, 0.2),
+    transparent
+  );
+  transform: skewX(-18deg) translateX(-260%);
+  pointer-events: none;
+}
+
+.partnersGrid.visible .logoPlaque::after {
+  animation: plaqueSweep 1.05s var(--motion-ease-out) 0.38s both;
+}
+
+.partnersGrid.visible .logoCard:nth-child(2) .logoPlaque::after {
+  animation-delay: 0.5s;
+}
+
+.logoCard:hover .logoPlaque {
+  transform: none;
+}
+
 .delay1 {
-  transition-delay: 0.06s;
+  transition-delay: 0.04s;
 }
 .delay2 {
-  transition-delay: 0.16s;
+  transition-delay: 0.12s;
 }
 .delay3 {
-  transition-delay: 0.26s;
+  transition-delay: 0.22s;
 }
 .delay4 {
-  transition-delay: 0.36s;
+  transition-delay: 0.32s;
 }
 .delay5 {
-  transition-delay: 0.46s;
+  transition-delay: 0.42s;
 }
 .delay6 {
-  transition-delay: 0.56s;
+  transition-delay: 0.52s;
 }
 
 /* Responsive */
@@ -326,13 +399,20 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fadeUp {
+  .fadeUp,
+  .partnerCategory {
     opacity: 1;
+    clip-path: none;
     transform: none;
     transition: none;
   }
 
-  .logoCard:hover .logoWrapper {
+  .partnersGrid.visible .logoPlaque::after {
+    display: none;
+    animation: none;
+  }
+
+  .logoCard:hover .logoPlaque {
     transform: none;
   }
 }

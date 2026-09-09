@@ -165,34 +165,107 @@
   margin: 0 auto;
 }
 
-/* Animations */
+/* Directional reveals — the two organizers meet in the middle. */
 .fadeUp {
   opacity: 0;
-  transform: translateY(28px);
+  clip-path: inset(0 0 18% 0);
+  transform: translateY(24px);
   transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity var(--motion-duration-base) var(--motion-ease-out),
+    transform var(--motion-duration-slow) var(--motion-ease-out),
+    clip-path var(--motion-duration-slow) var(--motion-ease-out);
 }
 
 .fadeUp.visible {
   opacity: 1;
-  transform: translateY(0);
+  clip-path: inset(0 0 0 0);
+  transform: translate(0, 0);
+}
+
+.organizerCard {
+  position: relative;
+  overflow: hidden;
+}
+
+.organizerCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #b8860b, transparent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1s var(--motion-ease-out);
+}
+
+.organizerCard:nth-child(even)::before {
+  transform-origin: right center;
+}
+
+.organizerCard.visible::before {
+  transform: scaleX(1);
+}
+
+.organizerCard.fadeUp:nth-child(odd) {
+  clip-path: inset(0 16% 0 0);
+  transform: translateX(-42px) rotate(-0.45deg);
+}
+
+.organizerCard.fadeUp:nth-child(even) {
+  clip-path: inset(0 0 0 16%);
+  transform: translateX(42px) rotate(0.45deg);
+}
+
+.organizerCard.fadeUp.visible {
+  clip-path: inset(0 0 0 0);
+  transform: translateX(0) rotate(0);
+}
+
+.closingMessage.fadeUp {
+  transform: translateY(18px) scale(0.985);
+}
+
+.closingMessage.fadeUp.visible {
+  transform: translateY(0) scale(1);
+}
+
+.organizerCard:hover,
+.organizerCard:hover .logoWrapper {
+  transform: none;
 }
 
 .delay1 {
-  transition-delay: 0.06s;
+  transition-delay: 0.04s;
 }
 .delay2 {
-  transition-delay: 0.16s;
+  transition-delay: 0.12s;
 }
 .delay3 {
-  transition-delay: 0.26s;
+  transition-delay: 0.22s;
 }
 .delay4 {
-  transition-delay: 0.36s;
+  transition-delay: 0.32s;
 }
 .delay5 {
-  transition-delay: 0.46s;
+  transition-delay: 0.44s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fadeUp,
+  .organizerCard.fadeUp,
+  .closingMessage.fadeUp {
+    opacity: 1;
+    clip-path: none;
+    transform: none;
+    transition: none;
+  }
+
+  .organizerCard::before {
+    transform: scaleX(1);
+    transition: none;
+  }
 }
 
 .closingMessage {
