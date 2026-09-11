@@ -812,3 +812,41 @@
     transition: none;
   }
 }
+
+/* ── Small-screen award readability ── */
+.awardKinds li {
+  font-size: clamp(0.6rem, 0.82vw, 0.68rem);
+}
+
+@media (max-width: 540px) {
+  .treasuryPanel {
+    padding-bottom: 230px;
+  }
+
+  .awardKinds {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .awardKinds li,
+  .awardKinds li:first-child,
+  .awardKinds li:last-child {
+    grid-template-columns: 38px minmax(0, 1fr);
+    justify-items: start;
+    gap: 10px;
+    padding: 9px 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(168, 121, 41, 0.16);
+    font-size: 0.65rem;
+    text-align: left;
+  }
+
+  .awardKinds li:last-child {
+    border-bottom: 0;
+  }
+
+  .landscapeCaption {
+    font-size: 0.56rem;
+    letter-spacing: 0.2em;
+  }
+}

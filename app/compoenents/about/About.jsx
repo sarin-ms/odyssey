@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { Hourglass, Users, GraduationCap, Compass } from "lucide-react";
+import useRevealOnScroll from "@/app/hooks/useRevealOnScroll";
 import styles from "./About.module.css";
 
 const STATS = [
@@ -36,21 +37,7 @@ const STATS = [
 
 export default function About() {
   const sectionRef = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-        }
-      },
-      { threshold: 0.12 },
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const visible = useRevealOnScroll(sectionRef);
 
   const v = visible ? styles.visible : "";
 
@@ -118,12 +105,12 @@ export default function About() {
 
         {/* ── Right Column: One Theme. Unlimited Possibilities ── */}
         <div className={styles.rightCol}>
-          <h2
+          <h3
             className={`${styles.themeTitle} ${styles.fadeUp} ${v} ${styles.delay2}`}
           >
             <span className={styles.themeLineOne}>One Theme.</span>
             <span className={styles.themeLineTwo}>Unlimited Possibilities</span>
-          </h2>
+          </h3>
 
           <div
             className={`${styles.textStack} ${styles.fadeUp} ${v} ${styles.delay3}`}

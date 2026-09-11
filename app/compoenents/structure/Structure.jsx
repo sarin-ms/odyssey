@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import useRevealOnScroll from "@/app/hooks/useRevealOnScroll";
 import styles from "./Structure.module.css";
 
 const iconProps = {
@@ -96,19 +97,7 @@ const ROUTE_PATH =
 
 export default function Structure() {
   const sectionRef = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-      },
-      { threshold: 0.12 },
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const visible = useRevealOnScroll(sectionRef);
 
   const v = visible ? styles.visible : "";
 

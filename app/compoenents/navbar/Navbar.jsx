@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Navbar.module.css";
 
 const NAV_ITEMS = [
@@ -13,81 +13,185 @@ const NAV_ITEMS = [
   { label: "FAQ", href: "#faq" },
 ];
 
+const MOBILE_QUERY = "(max-width: 900px)";
+
 export default function Navbar() {
+  const menuButtonRef = useRef(null);
+  const menuRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeHref, setActiveHref] = useState("");
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 40);
+    let frame = 0;
 
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        const progress = (window.scrollY / totalHeight) * 100;
-        setScrollProgress(Math.min(100, Math.max(0, progress)));
+    const update = () => {
+      frame = 0;
+      const scrollTop = window.scrollY;
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? (scrollTop / scrollable) * 100 : 0;
+      const marker = scrollTop + Math.min(window.innerHeight * 0.34, 320);
+      let nextActive = "";
+
+      for (const item of NAV_ITEMS) {
+        const section = document.querySelector(item.href);
+        if (section && section.offsetTop <= marker) nextActive = item.href;
       }
+
+      setScrolled((current) => {
+        const next = scrollTop > 40;
+        return current === next ? current : next;
+      });
+      setScrollProgress(Math.min(100, Math.max(0, progress)));
+      setActiveHref((current) =>
+        current === nextActive ? current : nextActive,
+      );
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    const requestUpdate = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    if (!mobileOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const mobileQuery = window.matchMedia(MOBILE_QUERY);
+    const focusFrame = requestAnimationFrame(() => {
+      menuRef.current?.querySelector("a")?.focus();
+    });
+
+    document.body.style.overflow = "hidden";
+
+    const closeAndRestoreFocus = () => {
+      setMobileOpen(false);
+      requestAnimationFrame(() => menuButtonRef.current?.focus());
+    };
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeAndRestoreFocus();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const links = Array.from(menuRef.current?.querySelectorAll("a") ?? []);
+      const focusable = [menuButtonRef.current, ...links].filter(Boolean);
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    const handleViewportChange = (event) => {
+      if (!event.matches) setMobileOpen(false);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    mobileQuery.addEventListener("change", handleViewportChange);
+
     return () => {
-      document.body.style.overflow = "";
+      cancelAnimationFrame(focusFrame);
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+      mobileQuery.removeEventListener("change", handleViewportChange);
     };
   }, [mobileOpen]);
+
+  const closeMenu = () => setMobileOpen(false);
 
   return (
     <nav
       className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}
       id="main-nav"
+      aria-label="Primary navigation"
     >
-      <a href="#" className={styles.navLogo}>
+      <a href="#hero" className={styles.navLogo} onClick={closeMenu}>
         ODYSSEY
       </a>
 
-      <ul
-        className={`${styles.navLinks} ${
-          mobileOpen ? styles.mobileOpen : ""
-        }`}
-      >
-        {NAV_ITEMS.map((item) => (
-          <li key={item.label}>
-            <a
-              href={item.href}
-              className={styles.navLink}
-              onClick={() => setMobileOpen(false)}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))}
-        <li>
-          <a href="#register" className={styles.registerBtn}>
-            Register →
-          </a>
-        </li>
-      </ul>
-
       <button
+        ref={menuButtonRef}
+        type="button"
         className={`${styles.mobileMenuBtn} ${mobileOpen ? styles.open : ""}`}
-        onClick={() => setMobileOpen((o) => !o)}
-        aria-label="Toggle navigation menu"
+        onClick={() => setMobileOpen((open) => !open)}
+        aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={mobileOpen}
+        aria-controls="primary-navigation-links"
       >
         <span className={styles.hamburgerLine} />
         <span className={styles.hamburgerLine} />
         <span className={styles.hamburgerLine} />
       </button>
 
-      {/* Scroll Progress Bar along bottom of Navbar */}
+      <button
+        type="button"
+        className={`${styles.menuBackdrop} ${mobileOpen ? styles.backdropOpen : ""}`}
+        onClick={() => {
+          setMobileOpen(false);
+          requestAnimationFrame(() => menuButtonRef.current?.focus());
+        }}
+        aria-label="Close navigation menu"
+        tabIndex={-1}
+      />
+
+      <ul
+        ref={menuRef}
+        id="primary-navigation-links"
+        className={`${styles.navLinks} ${mobileOpen ? styles.mobileOpen : ""}`}
+      >
+        {NAV_ITEMS.map((item) => {
+          const active = activeHref === item.href;
+
+          return (
+            <li key={item.label}>
+              <a
+                href={item.href}
+                className={`${styles.navLink} ${active ? styles.activeNavLink : ""}`}
+                aria-current={active ? "location" : undefined}
+                onClick={closeMenu}
+              >
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
+        <li>
+          <a
+            href="#register"
+            className={styles.registerBtn}
+            onClick={closeMenu}
+          >
+            Register <span aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ul>
+
       <div
-        className={`${styles.progressBarTrack} ${
-          scrollProgress > 0 ? styles.progressVisible : ""
-        }`}
+        className={`${styles.progressBarTrack} ${scrollProgress > 0 ? styles.progressVisible : ""}`}
         aria-hidden="true"
       >
         <div

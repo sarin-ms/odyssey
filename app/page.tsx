@@ -11,17 +11,25 @@ import Footer from "./compoenents/footer/Footer";
 
 export default function Home() {
   return (
-    <main>
+    <>
+      <a className="skipLink" href="#main-content">
+        Skip to main content
+      </a>
+
       <Navbar />
-      <Hero />
-      <About />
-      <Organizers />
-      <Prizepool />
-      <Structure />
-      <Schedule />
-      <Partners />
-      <FAQ />
+
+      <main id="main-content" tabIndex={-1}>
+        <Hero />
+        <About />
+        <Organizers />
+        <Prizepool />
+        <Structure />
+        <Schedule />
+        <Partners />
+        <FAQ />
+      </main>
+
       <Footer />
-    </main>
+    </>
   );
 }

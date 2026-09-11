@@ -754,9 +754,7 @@
   }
 
   .journeyKey {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    text-align: center;
+    display: none;
   }
 
   .keyPointEnd {
@@ -816,5 +814,28 @@
   .chart.visible .compassRose {
     opacity: 0.12;
     transform: translateY(-50%);
+  }
+}
+
+/* ── Faster linear-chart motion on compact screens ── */
+@media (max-width: 820px) {
+  .fadeUp,
+  .waypoint,
+  .waypoint1,
+  .waypoint2,
+  .waypoint3,
+  .waypoint4 {
+    clip-path: none;
+    transition:
+      opacity 0.5s var(--motion-ease-soft),
+      transform 0.68s var(--motion-ease-out);
+  }
+
+  .chart::before {
+    transition-duration: 0.95s;
+  }
+
+  .waypointMarker {
+    transition-duration: 0.68s;
   }
 }

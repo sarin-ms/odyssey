@@ -16,13 +16,15 @@
   --color-brown-light: #8b6914;
   --font-display: "Zapf Renaissance", "Playfair Display", Georgia, serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
-
   --font-label: "Cinzel", "Playfair Display", Georgia, serif;
-  /* Lora carries a true italic, for pull quotes and standfirst lines. */
   --font-serif: "Lora", Georgia, serif;
-  --motion-duration-fast: 240ms;
-  --motion-duration-base: 720ms;
-  --motion-duration-slow: 980ms;
+  --nav-offset: 88px;
+  --page-gutter: clamp(18px, 5vw, 64px);
+  --content-wide: 1320px;
+  --section-space: clamp(72px, 9vw, 124px);
+  --motion-duration-fast: 220ms;
+  --motion-duration-base: 640ms;
+  --motion-duration-slow: 880ms;
   --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --motion-ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -34,46 +36,127 @@
   --font-mono: var(--font-geist-mono);
 }
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  overflow-x: hidden;
   width: 100%;
+  overflow-x: clip;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-offset);
+  scrollbar-color: rgba(92, 58, 33, 0.55) rgba(245, 239, 230, 0.8);
+  scrollbar-width: thin;
 }
 
 body {
+  min-width: 320px;
+  width: 100%;
+  overflow-x: clip;
   background: var(--color-cream);
   color: var(--color-brown-dark);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
-  width: 100%;
 }
 
-:where(a, button, [tabindex]):focus-visible {
+main:focus {
+  outline: none;
+}
+
+section[id] {
+  scroll-margin-top: var(--nav-offset);
+}
+
+::selection {
+  color: #fffaf1;
+  background: rgba(53, 106, 106, 0.88);
+}
+
+:where(a, button, summary, [tabindex]):focus-visible {
   outline: 2px solid var(--color-brown-light);
   outline-offset: 4px;
 }
 
+.skipLink {
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  z-index: 1000;
+  padding: 11px 16px;
+  border: 1px solid rgba(61, 43, 31, 0.28);
+  border-radius: 999px;
+  color: var(--color-brown-dark);
+  background: #fffaf1;
+  box-shadow: 0 10px 30px rgba(61, 43, 31, 0.18);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(calc(-100% - 20px));
+  transition: transform var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.skipLink:focus-visible {
+  transform: translateY(0);
+}
+
 *::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(245, 239, 230, 0.8);
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(245, 239, 230, 0.8);
+  border-radius: 999px;
+  background: rgba(92, 58, 33, 0.55);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(53, 106, 106, 0.78);
+}
+
+/* Keep the document chrome clean; component scroll areas can opt back in. */
+html,
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
   display: none;
   width: 0;
   height: 0;
-  background: transparent;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --nav-offset: 76px;
+    --section-space: clamp(64px, 11vw, 96px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
   }
 }

@@ -187,7 +187,7 @@ export default function FAQ() {
 
                   <span className={styles.questionCopy}>
                     <span className={styles.category}>{faq.category}</span>
-                    <span className={styles.question}>{faq.question}</span>
+                    <h3 className={styles.question}>{faq.question}</h3>
                   </span>
 
                   <span className={styles.toggle} aria-hidden="true">

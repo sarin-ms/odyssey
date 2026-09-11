@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
+import useRevealOnScroll from "@/app/hooks/useRevealOnScroll";
 import styles from "./Organizers.module.css";
 
 const ORGANIZERS = [
@@ -29,21 +30,7 @@ const ORGANIZERS = [
 
 export default function Organizers() {
   const sectionRef = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-        }
-      },
-      { threshold: 0.12 },
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const visible = useRevealOnScroll(sectionRef);
 
   const v = visible ? styles.visible : "";
 

@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "./Footer.module.css";
 
 const stroke = {

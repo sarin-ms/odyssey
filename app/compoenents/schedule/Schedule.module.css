@@ -853,3 +853,111 @@
     transform: none;
   }
 }
+
+/* ── Responsive interaction and discoverability ── */
+.scheduleWrapper {
+  scroll-margin-top: var(--nav-offset);
+}
+
+.scrollHint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 10px;
+  font-family: var(--font-label);
+  font-size: clamp(0.62rem, 1.4vw, 0.72rem);
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  color: rgba(35, 72, 74, 0.78);
+  text-transform: uppercase;
+}
+
+.scrollHint span {
+  color: var(--voyage-gold);
+  animation: timelineHint 1.8s var(--motion-ease-soft) infinite;
+}
+
+.viewportFree {
+  padding-bottom: 14px;
+  mask-image: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(53, 106, 106, 0.7) rgba(53, 106, 106, 0.1);
+  scroll-padding-inline: clamp(14px, 4vw, 36px);
+  touch-action: pan-x pan-y;
+}
+
+.viewportFree .col {
+  scroll-snap-stop: always;
+}
+
+.viewportFree::-webkit-scrollbar {
+  height: 8px;
+}
+
+.viewportFree::-webkit-scrollbar-track {
+  margin-inline: clamp(14px, 4vw, 36px);
+  border-radius: 999px;
+  background: rgba(53, 106, 106, 0.1);
+}
+
+.viewportFree::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(53, 106, 106, 0.72);
+  background-clip: padding-box;
+}
+
+@keyframes timelineHint {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+@media (max-width: 1099px) {
+  .stage {
+    padding-top: clamp(72px, 10vw, 96px);
+    padding-bottom: clamp(34px, 6vw, 58px);
+  }
+
+  .viewportFree {
+    flex: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .scrollHint {
+    max-width: 30ch;
+    margin-inline: auto;
+    font-size: 0.64rem;
+    line-height: 1.5;
+  }
+
+  .viewportFree .track {
+    min-height: 410px;
+  }
+}
+
+@media (hover: none) {
+  .card:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollHint span {
+    animation: none;
+  }
+}
+
+.cardBottom .cardHead {
+  order: 2;
+}
+
+.cardBottom .cardBody {
+  order: 1;
+}

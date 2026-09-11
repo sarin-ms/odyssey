@@ -310,7 +310,7 @@ export default function Schedule() {
 
   useEffect(() => {
     const ok = window.matchMedia(
-      "(min-height: 480px) and (prefers-reduced-motion: no-preference)",
+      "(min-width: 1100px) and (min-height: 680px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
     );
 
     const sync = () => setPinned(ok.matches);
@@ -404,14 +404,30 @@ export default function Schedule() {
     };
   }, [pinned, metrics.scrollLen, metrics.stageH, renderVoyageProgress]);
 
-  /* Entrance animation. */
+  /* Entrance animation with a readable fallback and one-shot cleanup. */
   useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      const frame = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(frame);
+    }
+
     const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setVisible(true),
-      { threshold: 0.05 },
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setVisible(true);
+        observer.disconnect();
+      },
+      { threshold: 0.05, rootMargin: "0px 0px -4% 0px" },
     );
 
-    if (wrapperRef.current) observer.observe(wrapperRef.current);
+    observer.observe(wrapper);
     return () => observer.disconnect();
   }, []);
 
@@ -452,6 +468,16 @@ export default function Schedule() {
           >
             Fifteen ports of call. One voyage from first idea to final showcase.
           </p>
+
+          <p
+            className={`${styles.scrollHint} ${styles.fadeUp} ${v} ${styles.delay3}`}
+            id="schedule-instructions"
+          >
+            {pinned
+              ? "Keep scrolling to chart the full voyage"
+              : "Swipe or scroll sideways to explore all 15 stops"}
+            <span aria-hidden="true">→</span>
+          </p>
         </div>
 
         {/* Overflow mode is driven by the pinned state, not a media query, so
@@ -463,6 +489,7 @@ export default function Schedule() {
           ref={viewportRef}
           tabIndex={pinned ? undefined : 0}
           aria-label={pinned ? undefined : "Scrollable voyage timeline"}
+          aria-describedby="schedule-instructions"
         >
           <ol className={`${styles.track} ${v}`} ref={trackRef}>
             {BLOCKS.map((block, i) => {
@@ -557,20 +584,14 @@ function BlockCard({ block, place }) {
     </div>
   );
 
-  /* Header band goes on the outer edge so the log body faces the route. */
+  /* Keep the heading first in the DOM; CSS places it on the outer edge. */
   return (
-    <div className={styles.card} data-stop={block.num}>
-      {place === "top" ? (
-        <>
-          {head}
-          {body}
-        </>
-      ) : (
-        <>
-          {body}
-          {head}
-        </>
-      )}
+    <div
+      className={`${styles.card} ${place === "bottom" ? styles.cardBottom : ""}`}
+      data-stop={block.num}
+    >
+      {head}
+      {body}
     </div>
   );
 }

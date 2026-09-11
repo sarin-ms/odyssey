@@ -357,3 +357,27 @@
     transition: none;
   }
 }
+
+/* ── Touch and keyboard refinements ── */
+.contactLink {
+  text-decoration: underline;
+  text-decoration-color: rgba(107, 82, 51, 0.32);
+  text-underline-offset: 3px;
+}
+
+.social {
+  width: 44px;
+  height: 44px;
+}
+
+.social:focus-visible {
+  background: rgba(255, 255, 255, 0.62);
+  border-color: rgba(138, 106, 53, 0.8);
+  color: #2a1b12;
+}
+
+@media (hover: none) {
+  .social:hover {
+    transform: none;
+  }
+}

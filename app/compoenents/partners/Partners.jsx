@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
+import useRevealOnScroll from "@/app/hooks/useRevealOnScroll";
 import styles from "./Partners.module.css";
 
 /* Intrinsic dimensions matter here — all three logos are wide horizontal
@@ -32,39 +33,9 @@ const GOOGLE_LOGO = {
   h: 204,
 };
 
-const TECHNOLOGIES = [
-  "Gemini API",
-  "Google AI Studio",
-  "Google Antigravity",
-  "Firebase",
-  "Google Cloud",
-  "Google Maps Platform",
-  "Android",
-  "Flutter",
-  "ML Kit",
-  "Google AI Edge",
-  "Coral",
-  "Google Assistant / Google Home APIs",
-  "Google Pomelli",
-];
-
 export default function Partners() {
   const sectionRef = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-        }
-      },
-      { threshold: 0.12 },
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const visible = useRevealOnScroll(sectionRef);
 
   const v = visible ? styles.visible : "";
 

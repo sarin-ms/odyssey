@@ -417,3 +417,33 @@
   }
 }
 
+
+/* ── Lightweight touch-device reveals ── */
+@media (max-width: 900px) {
+  .fadeUp,
+  .partnerCategory,
+  .partnerCategory:nth-child(even) {
+    clip-path: none;
+    transform: translateY(15px);
+    transition:
+      opacity 0.52s var(--motion-ease-soft),
+      transform 0.68s var(--motion-ease-out);
+  }
+
+  .fadeUp.visible,
+  .partnersGrid.visible .partnerCategory,
+  .partnersGrid.visible .partnerCategory:nth-child(even) {
+    transform: translateY(0);
+  }
+
+  .partnerCategory {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (hover: none) {
+  .logoCard:hover .logoPlaque {
+    transform: none;
+  }
+}
