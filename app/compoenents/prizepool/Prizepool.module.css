@@ -311,7 +311,7 @@
   z-index: 1;
   height: 33%;
   overflow: hidden;
-  background-image: url("/assets/prizepool_bg.png");
+  background-image: url("/assets/prizepool_bg.webp");
   background-repeat: no-repeat;
   background-position: center 44%;
   background-size: cover;

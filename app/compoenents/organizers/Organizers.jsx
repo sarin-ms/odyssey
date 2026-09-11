@@ -11,7 +11,7 @@ const ORGANIZERS = [
     role: "Student-Driven Technology Community",
     description:
       "μLearn CHN is a student-driven technology and learning community focused on enabling students to learn, collaborate, build, and engage with the wider developer ecosystem. Through technical initiatives, workshops, community activities, and hands-on experiences, μLearn CHN encourages students to transform knowledge into practical skills and meaningful projects.",
-    logo: "/assets/mulearn.png",
+    logo: "/assets/mulearn.webp",
     logoW: 159,
     logoH: 55,
   },

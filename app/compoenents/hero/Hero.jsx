@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./Hero.module.css";
-import horseImg from "@/public/assets/horse_half.png";
-import heroBg from "@/public/assets/odyssey_hero.png";
+import horseImg from "@/public/assets/horse_half.webp";
+import heroBg from "@/public/assets/odyssey_hero.webp";
 
 export default function Hero() {
   return (
@@ -47,7 +47,7 @@ export default function Hero() {
                   <div className={styles.plaqueInner}>
                     <span className={styles.plaqueStar}>
                       <Image
-                        src="/assets/star.png"
+                        src="/assets/star.webp"
                         alt=""
                         width={24}
                         height={24}

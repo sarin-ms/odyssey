@@ -106,7 +106,7 @@ export default function About() {
           <div className={styles.circleHalo} />
           <div className={styles.horseFrame}>
             <Image
-              src="/horse_full.png"
+              src="/horse_full.webp"
               alt="Wooden Trojan horse sculpture"
               width={1122}
               height={1402}

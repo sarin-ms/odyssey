@@ -16,7 +16,7 @@ const ORGANIZER_LOGOS = [
     h: 73,
   },
   {
-    src: "/assets/mulearn.png",
+    src: "/assets/mulearn.webp",
     alt: "μLearn CHN logo",
     label: "μLearn CHN",
     w: 159,
@@ -25,7 +25,7 @@ const ORGANIZER_LOGOS = [
 ];
 
 const GOOGLE_LOGO = {
-  src: "/assets/google.png",
+  src: "/assets/google.webp",
   alt: "Google for Developers logo",
   label: "Google for Developers",
   w: 1376,
