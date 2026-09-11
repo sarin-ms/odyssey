@@ -24,7 +24,6 @@
   min-height: calc(100vh - 120px);
 }
 
-/* ── Left Column ── */
 .leftCol {
   position: relative;
   z-index: 5;
@@ -103,7 +102,6 @@
   border-radius: 0 6px 6px 0;
 }
 
-/* ── Center Graphic: Trojan Horse + Circle Halo ── */
 .centerGraphic {
   position: absolute;
   left: 50%;
@@ -154,7 +152,6 @@
   user-select: none;
 }
 
-/* ── Right Column ── */
 .rightCol {
   position: relative;
   z-index: 5;
@@ -184,7 +181,6 @@
   letter-spacing: 0.02em;
 }
 
-/* ── Frosted Glass Stats Card ── */
 .statsCard {
   margin-top: 32px;
   width: 100%;
@@ -267,7 +263,6 @@
   max-width: 105px;
 }
 
-/* ── Editorial section reveals ── */
 @keyframes statSettle {
   from {
     opacity: 0;
@@ -390,7 +385,6 @@
   }
 }
 
-/* ── Responsive Adaptations ── */
 @media (max-width: 1240px) {
   .aboutInner {
     gap: 20px;
@@ -567,7 +561,6 @@
   }
 }
 
-/* ── Lightweight touch-device reveals ── */
 @media (max-width: 900px) {
   .fadeUp,
   .leftCol .fadeUp,

@@ -13,7 +13,6 @@
   pointer-events: none;
 }
 
-/* ── Hero Section ── */
 .heroSection {
   position: relative;
   width: 100%;
@@ -163,11 +162,6 @@
   flex-shrink: 0;
 }
 
-.plaqueStarSvg {
-  width: 22px;
-  height: 22px;
-}
-
 .plaqueDivider {
   width: 1px;
   height: 22px;
@@ -230,41 +224,14 @@
   filter: drop-shadow(0 20px 40px rgba(61, 43, 31, 0.2));
 }
 
-/* ── Motion: a quiet, editorial opening sequence ── */
-@keyframes sceneSettle {
-  from {
-    transform: scale(1.035);
-    filter: saturate(0.86) contrast(0.97);
-  }
-  to {
-    transform: scale(1);
-    filter: saturate(1) contrast(1);
-  }
-}
-
-@keyframes editorialReveal {
-  from {
-    opacity: 0;
-    clip-path: inset(100% 0 0 0);
-    transform: translateY(24px);
-    filter: blur(3px);
-  }
-  to {
-    opacity: 1;
-    clip-path: inset(0 0 0 0);
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
 .heroBgImage {
   transform-origin: center bottom;
-  animation: sceneSettle 1.7s var(--motion-ease-out) both;
+  animation: sceneSettleOptimized 1.7s var(--motion-ease-out) both;
 }
 
 .animReveal {
   opacity: 0;
-  animation: editorialReveal 0.95s var(--motion-ease-out) both;
+  animation: editorialRise 0.95s var(--motion-ease-out) both;
 }
 
 .animDelay1 {
@@ -287,7 +254,6 @@
   animation-delay: 0.62s;
 }
 
-/* The hero horse and its halo intentionally never animate. */
 .heroImageWrapper,
 .horseHalo,
 .horseImage {
@@ -405,7 +371,6 @@
   }
 }
 
-/* ── Responsive ── */
 @media (max-width: 1024px) {
   .heroContent {
     flex-direction: column;
@@ -511,11 +476,6 @@
     letter-spacing: 0.16em;
   }
 
-  .plaqueStarSvg {
-    width: 20px;
-    height: 20px;
-  }
-
   .heroImageWrapper {
     position: absolute;
     bottom: 0;
@@ -578,7 +538,6 @@
   }
 }
 
-/* ── Cross-device experience refinements ── */
 @keyframes sceneSettleOptimized {
   from {
     transform: scale(1.025);

@@ -61,16 +61,6 @@
   letter-spacing: 0.05em;
 }
 
-.subtitle {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #5c3a21;
-  opacity: 0.85;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
 .partnersGrid {
   display: flex;
   flex-direction: column;
@@ -174,112 +164,6 @@
   text-align: center;
 }
 
-.technologiesSection {
-  max-width: 1100px;
-  margin: clamp(40px, 6vw, 60px) auto;
-  padding: clamp(28px, 5vw, 48px) clamp(20px, 4vw, 40px);
-  background: rgba(236, 226, 215, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(160, 135, 110, 0.2);
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(42, 27, 18, 0.04);
-}
-
-.techIntro {
-  font-family: var(--font-body);
-  font-size: clamp(0.9rem, 2.7vw, 1rem);
-  line-height: 1.72;
-  color: #3d2b1f;
-  text-align: center;
-  margin-bottom: clamp(22px, 4vw, 32px);
-  opacity: 0.9;
-}
-
-.techGrid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: clamp(22px, 4vw, 32px);
-}
-
-.techItem {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  background: rgba(245, 239, 230, 0.7);
-  border: 1px solid rgba(140, 110, 85, 0.18);
-  border-radius: 999px;
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease;
-}
-
-.techItem:hover {
-  background: rgba(224, 212, 198, 0.85);
-  border-color: rgba(140, 110, 85, 0.3);
-}
-
-.techDot {
-  color: #8b6914;
-  font-size: 1.1rem;
-  line-height: 0;
-  padding-bottom: 3px;
-}
-
-.techName {
-  font-family: var(--font-body);
-  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
-  font-weight: 500;
-  color: #3d2b1f;
-  white-space: nowrap;
-}
-
-.techDescription {
-  font-family: var(--font-body);
-  font-size: clamp(0.86rem, 2.6vw, 0.92rem);
-  line-height: 1.72;
-  color: #443224;
-  opacity: 0.85;
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.buildSection {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: clamp(26px, 4.5vw, 40px) clamp(20px, 4vw, 40px);
-  text-align: center;
-  background: rgba(236, 226, 215, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(160, 135, 110, 0.2);
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(42, 27, 18, 0.04);
-}
-
-.buildTitle {
-  font-family: var(--font-display);
-  font-size: clamp(1.35rem, 4.6vw, 1.75rem);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  color: #2a1b12;
-  margin-bottom: 18px;
-  line-height: 1.3;
-}
-
-.buildText {
-  font-family: var(--font-body);
-  font-size: clamp(0.9rem, 2.7vw, 0.98rem);
-  line-height: 1.75;
-  color: #443224;
-  opacity: 0.9;
-}
-
-/* Partner plaques reveal directionally, then catch one restrained light pass. */
 @keyframes plaqueSweep {
   from {
     transform: skewX(-18deg) translateX(-260%);
@@ -372,29 +256,13 @@
 .delay2 {
   transition-delay: 0.12s;
 }
-.delay3 {
-  transition-delay: 0.22s;
-}
 .delay4 {
   transition-delay: 0.32s;
 }
-.delay5 {
-  transition-delay: 0.42s;
-}
-.delay6 {
-  transition-delay: 0.52s;
-}
 
-/* Responsive */
 @media (max-width: 480px) {
-  .partnerCategory,
-  .technologiesSection,
-  .buildSection {
+  .partnerCategory {
     border-radius: 10px;
-  }
-
-  .techName {
-    white-space: normal;
   }
 }
 
@@ -418,7 +286,6 @@
 }
 
 
-/* ── Lightweight touch-device reveals ── */
 @media (max-width: 900px) {
   .fadeUp,
   .partnerCategory,

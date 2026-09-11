@@ -89,7 +89,6 @@ export default function Footer() {
 
       <div className={styles.inner}>
         <div className={styles.top}>
-          {/* ── Brand ── */}
           <div className={styles.brand}>
             <p className={styles.eyebrow}>
               IEDC BOOTCAMP CEC × <span className={styles.mu}>μ</span>LEARN CHN

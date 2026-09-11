@@ -44,7 +44,6 @@ export default function About() {
   return (
     <section className={styles.aboutSection} id="about" ref={sectionRef}>
       <div className={styles.aboutInner}>
-        {/* ── Left Column: The Expedition ── */}
         <div className={styles.leftCol}>
           <div
             className={`${styles.badgeWrapper} ${styles.fadeUp} ${v} ${styles.delay1}`}
@@ -86,7 +85,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* ── Center / Lower Center Graphic: Circular Halo & Wooden Trojan Horse ── */}
         <div
           className={`${styles.centerGraphic} ${styles.fadeScale} ${v} ${styles.delay2}`}
         >
@@ -103,7 +101,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* ── Right Column: One Theme. Unlimited Possibilities ── */}
         <div className={styles.rightCol}>
           <h3
             className={`${styles.themeTitle} ${styles.fadeUp} ${v} ${styles.delay2}`}
@@ -129,7 +126,6 @@ export default function About() {
             </p>
           </div>
 
-          {/* Frosted Glass Stats Card */}
           <div
             className={`${styles.statsCard} ${styles.fadeUp} ${v} ${styles.delay4}`}
           >

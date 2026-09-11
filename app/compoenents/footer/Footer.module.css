@@ -233,7 +233,6 @@
   transform: translateY(-2px);
 }
 
-/* ── Bottom ── */
 .hairline {
   display: block;
   height: 1px;
@@ -254,7 +253,6 @@
   opacity: 0.85;
 }
 
-/* ── Responsive ── */
 @media (max-width: 1240px) {
   .top {
     max-width: 78%;
@@ -329,13 +327,6 @@
     justify-content: center;
   }
 
-  .bgImage {
-    object-fit: cover;
-    object-position: 18% 50%;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
   .scrim {
     background: rgba(242, 235, 223, 0.82);
   }
@@ -358,7 +349,6 @@
   }
 }
 
-/* ── Touch and keyboard refinements ── */
 .contactLink {
   text-decoration: underline;
   text-decoration-color: rgba(107, 82, 51, 0.32);

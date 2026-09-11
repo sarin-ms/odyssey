@@ -165,7 +165,6 @@
   margin: 0 auto;
 }
 
-/* Directional reveals — the two organizers meet in the middle. */
 .fadeUp {
   opacity: 0;
   clip-path: inset(0 0 18% 0);
@@ -309,7 +308,6 @@
   letter-spacing: 0.01em;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .organizersGrid {
     grid-template-columns: minmax(0, 1fr);
@@ -337,7 +335,6 @@
   }
 }
 
-/* ── Lightweight touch-device reveals ── */
 @media (max-width: 900px) {
   .fadeUp,
   .organizerCard.fadeUp:nth-child(odd),

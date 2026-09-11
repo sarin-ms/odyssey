@@ -107,7 +107,7 @@ export default function FAQ() {
 
       <div className={styles.faqInner}>
         <aside className={styles.briefing}>
-          <div className={styles.briefingCopy}>
+          <div>
             <div className={styles.eyebrow}>
               <span>BEFORE YOU SET SAIL</span>
               <span className={styles.eyebrowLine} aria-hidden="true" />

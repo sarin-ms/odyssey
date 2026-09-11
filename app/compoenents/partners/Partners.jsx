@@ -5,8 +5,6 @@ import Image from "next/image";
 import useRevealOnScroll from "@/app/hooks/useRevealOnScroll";
 import styles from "./Partners.module.css";
 
-/* Intrinsic dimensions matter here — all three logos are wide horizontal
-   lockups, so next/image needs the real aspect ratio to lay them out. */
 const ORGANIZER_LOGOS = [
   
   {

@@ -1,7 +1,6 @@
 .scheduleWrapper {
   --sea-deep: #23484a;
   --sea: #356a6a;
-  --sea-soft: #789b96;
   --voyage-gold: #bb8e38;
   --parchment: #f7f0e4;
   position: relative;
@@ -45,7 +44,6 @@
   overflow: hidden;
 }
 
-/* ── Voyage heading ── */
 .header {
   flex-shrink: 0;
   text-align: center;
@@ -110,7 +108,6 @@
   opacity: 0.96;
 }
 
-/* ── Horizontally scrolling chart ── */
 .viewport {
   position: relative;
   flex: 1;
@@ -253,7 +250,6 @@
   min-height: 0;
 }
 
-/* ── Parchment voyage logs ── */
 .card {
   position: relative;
   display: flex;
@@ -397,7 +393,6 @@
   opacity: 0.8;
 }
 
-/* ── Sea route and compass ports ── */
 .cellAxis {
   position: relative;
   min-width: 0;
@@ -508,7 +503,6 @@
   text-overflow: ellipsis;
 }
 
-/* ── Ship-driven voyage progress ── */
 .voyageProgress {
   position: relative;
   flex-shrink: 0;
@@ -683,7 +677,6 @@
   }
 }
 
-/* ── Entrance motion ── */
 .fadeUp {
   opacity: 0;
   clip-path: inset(0 0 22% 0);
@@ -854,7 +847,6 @@
   }
 }
 
-/* ── Responsive interaction and discoverability ── */
 .scheduleWrapper {
   scroll-margin-top: var(--nav-offset);
 }

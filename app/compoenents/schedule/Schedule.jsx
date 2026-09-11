@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./Schedule.module.css";
 
-/* ── Inline icons (no icon library) ── */
 const ico = {
   width: 20,
   height: 20,
@@ -404,7 +403,6 @@ export default function Schedule() {
     };
   }, [pinned, metrics.scrollLen, metrics.stageH, renderVoyageProgress]);
 
-  /* Entrance animation with a readable fallback and one-shot cleanup. */
   useEffect(() => {
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
@@ -480,8 +478,6 @@ export default function Schedule() {
           </p>
         </div>
 
-        {/* Overflow mode is driven by the pinned state, not a media query, so
-            CSS and the transform logic can never disagree. */}
         <div
           className={`${styles.viewport} ${
             pinned ? styles.viewportPinned : styles.viewportFree
@@ -502,8 +498,6 @@ export default function Schedule() {
                     onTop ? styles.colTop : styles.colBottom
                   }`}
                 >
-                  {/* Fixed-height lane in every column so the route stays
-                      aligned across columns, badge or not. */}
                   <div className={styles.dayLane}>
                     {block.day && (
                       <span className={styles.dayMark}>
@@ -584,7 +578,6 @@ function BlockCard({ block, place }) {
     </div>
   );
 
-  /* Keep the heading first in the DOM; CSS places it on the outer edge. */
   return (
     <div
       className={`${styles.card} ${place === "bottom" ? styles.cardBottom : ""}`}
