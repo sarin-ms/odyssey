@@ -3,58 +3,34 @@ import styles from "./FAQ.module.css";
 const FAQS = [
   {
     category: "Voyage brief",
-    question: "What is ODYSSEY?",
+    question: "What is ODYSSEY, and who can participate?",
     answer: (
       <p>
-        ODYSSEY is a 32-hour innovation and development hackathon that takes
-        participants from real-world problem discovery through research,
-        ideation, validation, development, and final demonstration.
+        ODYSSEY is a 32-hour innovation and development hackathon for college
+        and higher education students, taking teams from problem discovery and
+        research to ideation, validation, development, and final demonstration.
       </p>
     ),
   },
   {
-    category: "The crew",
-    question: "Who can participate?",
+    category: "Crew and course",
+    question: "What is the team size and theme?",
     answer: (
       <p>
-        Students from colleges and higher education institutions can
-        participate.
-      </p>
-    ),
-  },
-  {
-    category: "The crew",
-    question: "What is the team size?",
-    answer: <p>Teams can have 1 to 4 members.</p>,
-  },
-  {
-    category: "The course",
-    question: "Is there a specific theme?",
-    answer: (
-      <p>
-        No. ODYSSEY follows an open-theme format, allowing teams to explore
-        problems across software, hardware, AI, and emerging technologies.
+        Teams can have 1–4 members. ODYSSEY follows an open-theme format,
+        allowing participants to work on problems across software, hardware,
+        AI, and emerging technologies.
       </p>
     ),
   },
   {
     category: "Before departure",
-    question: "Do I need to have a fully developed idea before the event?",
+    question: "Do I need an idea beforehand? Can I change it later?",
     answer: (
       <p>
-        No. Participants will be guided through problem discovery, research,
-        and ideation. Your initial concept can evolve as you conduct research
-        and receive feedback.
-      </p>
-    ),
-  },
-  {
-    category: "Course correction",
-    question: "Can I change or improve my original idea?",
-    answer: (
-      <p>
-        Yes. ODYSSEY encourages teams to refine, improve, or pivot their ideas
-        based on research, validation, and feedback.
+        No. You can discover and develop your idea during the hackathon. Teams
+        are encouraged to refine, improve, or pivot their ideas based on
+        research, validation, and feedback.
       </p>
     ),
   },
@@ -63,105 +39,57 @@ const FAQS = [
     question: "What technologies can I use?",
     answer: (
       <p>
-        Participants can explore technologies including Gemini API, Google AI
-        Studio, Google Antigravity, Firebase, Google Cloud, Google Maps
-        Platform, Android, Flutter, ML Kit, Google AI Edge, Coral, and other
-        relevant tools.
-      </p>
-    ),
-  },
-  {
-    category: "Navigation tools",
-    question: "Do I have to use Google technologies?",
-    answer: (
-      <p>
-        ODYSSEY is designed around the Google developer ecosystem, and
-        participants are encouraged to meaningfully explore and integrate
-        Google technologies into their solutions.
+        Participants can use relevant technologies, with opportunities to
+        explore the Google developer ecosystem, including Gemini API, Google AI
+        Studio, Firebase, Google Cloud, Google Maps Platform, Android, Flutter,
+        ML Kit, Google AI Edge, Coral, and more. Meaningful use of Google
+        technologies is encouraged.
       </p>
     ),
   },
   {
     category: "Guidance",
-    question: "Will mentors be available?",
+    question: "Will guidance and mentorship be provided?",
     answer: (
       <p>
-        The event includes technical sessions, mentorship, and expert guidance
-        to support participants throughout the development journey.
-      </p>
-    ),
-  },
-  {
-    category: "Voyage brief",
-    question: "How long is the hackathon?",
-    answer: (
-      <p>
-        ODYSSEY is a 32-hour continuous innovation sprint conducted from
-        19–20 September 2026.
+        Yes. Technical sessions, mentors, and expert guidance will be available
+        throughout the development journey.
       </p>
     ),
   },
   {
     category: "Coordinates",
-    question: "Where is the event happening?",
-    answer: (
-      <>
-        <p>The event will be held at:</p>
-        <address className={styles.address}>
-          College of Engineering Chengannur (CEC)
-          <br />
-          Alappuzha, Kerala
-        </address>
-      </>
-    ),
-  },
-  {
-    category: "Provisions",
-    question: "Will food be provided?",
+    question: "When and where is ODYSSEY happening?",
     answer: (
       <p>
-        Yes. <strong>4 meals and 2 snacks</strong> will be provided throughout
-        the 32-hour hackathon.
+        The hackathon will be conducted as a 32-hour continuous sprint from
+        19–20 September 2026 at College of Engineering Chengannur (CEC),
+        Alappuzha, Kerala.
       </p>
     ),
   },
   {
-    category: "Packing list",
-    question: "What should I bring?",
+    category: "Provisions",
+    question:
+      "Will food and other facilities be provided? What should I bring?",
     answer: (
       <p>
-        Participants should bring their laptops, chargers, and any other
-        equipment required for their project development.
+        Yes. 4 meals and 2 snacks will be provided. Participants should bring
+        their laptops, chargers, and any project-specific equipment they need.
       </p>
     ),
   },
   {
     category: "Judging bearings",
-    question: "How will projects be evaluated?",
-    answer: (
-      <>
-        <p>Projects will be evaluated on:</p>
-        <ul className={styles.criteriaList}>
-          <li>Innovation</li>
-          <li>Problem understanding</li>
-          <li>Functionality</li>
-          <li>Technical execution</li>
-          <li>Effective use of Google and AI technologies</li>
-          <li>User experience</li>
-          <li>Real-world impact</li>
-          <li>Scalability</li>
-        </ul>
-      </>
-    ),
-  },
-  {
-    category: "The destination",
-    question: "What happens after the final demo?",
+    question:
+      "How will projects be evaluated and what happens after the demo?",
     answer: (
       <p>
-        Following the final presentations, the judging panel will evaluate the
-        solutions and the strongest teams will be recognized as the ODYSSEY
-        winners.
+        Projects will be judged on innovation, problem understanding,
+        functionality, technical execution, use of Google/AI technologies,
+        user experience, real-world impact, and scalability. After the final
+        demos, the judging panel will evaluate the solutions and recognize the
+        ODYSSEY winners.
       </p>
     ),
   },
@@ -186,8 +114,8 @@ export default function FAQ() {
             </div>
 
             <h2 className={styles.sectionTitle} id="faq-title">
-              Questions for
-              <span>the voyage.</span>
+              Frequently Asked
+              <span>Questions</span>
             </h2>
 
             <p className={styles.intro}>
