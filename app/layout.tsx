@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ODYSSEY — IEDC BOOTCAMP CEC X μLearn CHN",
+  title: "ODYSSEY | IEDC BOOTCAMP CEC X μLearn CHN",
   description:
     "ODYSSEY — Endless Possibilities. A creative expedition for curious minds, brought to you by IEDC Bootcamp CEC × xμLearn CHN.",
 };
