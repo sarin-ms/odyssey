@@ -63,24 +63,23 @@ export default function About() {
             className={`${styles.textStack} ${styles.fadeUp} ${v} ${styles.delay3}`}
           >
             <p className={styles.paragraph}>
-              ODYSSEY is a 32-hour innovation and development hackathon
+              ODYSSEY is a 32 hour innovation and development hackathon
               organized by IEDC BOOTCAMP CEC and μLearn CHN, bringing together
-              students, developers, innovators, and technology enthusiasts to
-              build solutions to real-world problems.
+              students, developers, and innovators to transform real world
+              problems into working solutions.
             </p>
 
             <p className={styles.paragraph}>
-              The hackathon follows a structured journey beginning with problem
-              discovery and research, moving through ideation and validation,
-              culminating in the development and demonstration of a functional
-              prototype.
+              The journey takes teams through problem discovery, research,
+              ideation, validation, development, and final demonstration,
+              turning ideas into functional prototypes through hands on building
+              and collaboration.
             </p>
 
             <p className={styles.paragraph}>
-              Participants will explore modern technologies across AI, software,
-              hardware, cloud, mobile development, and emerging technologies,
-              with opportunities to learn through technical sessions,
-              mentorship, collaborative activities, and hands-on development.
+              Participants will explore AI, software, hardware, cloud, mobile,
+              and emerging technologies, supported by technical sessions,
+              mentorship, and guided development.
             </p>
           </div>
         </div>
@@ -106,23 +105,23 @@ export default function About() {
             className={`${styles.themeTitle} ${styles.fadeUp} ${v} ${styles.delay2}`}
           >
             <span className={styles.themeLineOne}>One Theme.</span>
-            <span className={styles.themeLineTwo}>Unlimited Possibilities</span>
+            <span className={styles.themeLineTwo}>
+              Unlimited Possibilities.
+            </span>
           </h3>
 
           <div
             className={`${styles.textStack} ${styles.fadeUp} ${v} ${styles.delay3}`}
           >
             <p className={styles.paragraph}>
-              ODYSSEY does not limit participants to a predefined problem
-              statement. Teams are encouraged to identify meaningful real-world
-              problems, understand the people and contexts affected by them,
-              study existing solutions, and develop innovative approaches of
-              their own.
+              ODYSSEY follows an open theme format. Teams identify meaningful
+              real world problems, understand their users, explore existing
+              solutions, and develop innovative approaches.
             </p>
 
             <p className={`${styles.paragraph} ${styles.highlightQuote}`}>
-              Your starting idea is not your final destination. Research,
-              feedback, and validation can reshape the solution as you build.
+              Your idea can evolve. Research, feedback, and validation shape the
+              solution as you build.
             </p>
           </div>
 
