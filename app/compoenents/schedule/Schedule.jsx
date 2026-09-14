@@ -136,7 +136,7 @@ const BLOCKS = [
     title: "Cast Off",
     icon: <AnchorIcon />,
     day: "Day 1",
-    dayDate: "19 Sept 2026",
+    dayDate: "20 Sept 2026",
     items: [
       "Registration",
       "Inauguration + Google keynote",
@@ -222,7 +222,7 @@ const BLOCKS = [
     title: "Course Check",
     icon: <CompassIcon />,
     day: "Day 2",
-    dayDate: "20 Sept 2026",
+    dayDate: "21 Sept 2026",
     items: [
       "Waypoint 1 — Course check",
       "Build sprint (short)",

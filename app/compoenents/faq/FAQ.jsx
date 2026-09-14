@@ -63,7 +63,7 @@ const FAQS = [
     answer: (
       <p>
         The hackathon will be conducted as a 32-hour continuous sprint from
-        19–20 September 2026 at College of Engineering Chengannur (CEC),
+        20–21 September 2026 at College of Engineering Chengannur (CEC),
         Alappuzha, Kerala.
       </p>
     ),
@@ -150,7 +150,7 @@ export default function FAQ() {
               </div>
               <div>
                 <dt>Dates</dt>
-                <dd>19–20 Sep 2026</dd>
+                <dd>20–21 Sep 2026</dd>
               </div>
               <div>
                 <dt>Port</dt>

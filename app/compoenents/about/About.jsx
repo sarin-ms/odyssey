@@ -15,7 +15,7 @@ const STATS = [
   },
   {
     id: "members",
-    value: "1–4 Members",
+    value: "2-4 Members",
     label: "Flexible team size",
     icon: <Users size={18} strokeWidth={1.8} className={styles.statSvg} />,
   },
