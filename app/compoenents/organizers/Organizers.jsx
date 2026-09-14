@@ -7,16 +7,6 @@ import styles from "./Organizers.module.css";
 
 const ORGANIZERS = [
   {
-    id: "mulearn",
-    name: "μLearn CHN",
-    role: "Student-Driven Technology Community",
-    description:
-      "μLearn CHN is a student-driven technology and learning community focused on enabling students to learn, collaborate, build, and engage with the wider developer ecosystem. Through technical initiatives, workshops, community activities, and hands-on experiences, μLearn CHN encourages students to transform knowledge into practical skills and meaningful projects.",
-    logo: "/assets/mulearn.webp",
-    logoW: 159,
-    logoH: 55,
-  },
-  {
     id: "iedc",
     name: "IEDC BOOTCAMP CEC",
     role: "Innovation & Entrepreneurship Initiative",
@@ -25,6 +15,16 @@ const ORGANIZERS = [
     logo: "/assets/iedc.svg",
     logoW: 122,
     logoH: 73,
+  },
+  {
+    id: "mulearn",
+    name: "μLearn CHN",
+    role: "Student-Driven Technology Community",
+    description:
+      "μLearn CHN is a student-driven technology and learning community focused on enabling students to learn, collaborate, build, and engage with the wider developer ecosystem. Through technical initiatives, workshops, community activities, and hands-on experiences, μLearn CHN encourages students to transform knowledge into practical skills and meaningful projects.",
+    logo: "/assets/mulearn.webp",
+    logoW: 159,
+    logoH: 55,
   },
 ];
 
@@ -89,7 +89,7 @@ export default function Organizers() {
             Building the Next Generation of Innovators
           </h3>
           <p className={styles.closingText}>
-            Together, μLearn CHN and IEDC BOOTCAMP CEC bring students into an environment where ideas are challenged, technologies are explored, and solutions are built.
+            Together, IEDC BOOTCAMP CEC and μLearn CHN bring students into an environment where ideas are challenged, technologies are explored, and solutions are built.
           </p>
           <p className={styles.closingHighlight}>
             ODYSSEY is where learning meets making.
