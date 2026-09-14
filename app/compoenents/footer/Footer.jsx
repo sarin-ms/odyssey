@@ -48,7 +48,7 @@ const CONTACT = [
     icon: <PhoneIcon />,
     lines: [
       { label: "Blessy Stephen: +91 77368 59869", href: "tel:+917736859869" },
-      { label: "Adhi Narayanan: +91 70126 84869", href: "tel:+917012684869" },
+      { label: "Adhi Narayan: +91 70126 84869", href: "tel:+917012684869" },
     ],
   },
   {
