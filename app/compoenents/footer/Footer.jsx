@@ -38,30 +38,18 @@ const InstagramIcon = () => (
   </svg>
 );
 
-const TwitterIcon = () => (
-  <svg width="15" height="15" {...stroke}>
-    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-  </svg>
-);
-
-const LinkedinIcon = () => (
-  <svg width="15" height="15" {...stroke}>
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect x="2" y="9" width="4" height="12" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
-
 const CONTACT = [
   {
     icon: <MailIcon />,
-    label: "iedcbootcampcec@ceconline.edu",
-    href: "mailto:iedcbootcampcec@ceconline.edu",
+    label: "odysseycec2026@gmail.com",
+    href: "mailto:odysseycec2026@gmail.com",
   },
   {
     icon: <PhoneIcon />,
-    label: "+91 70126 84869",
-    href: "tel:+917012684869",
+    lines: [
+      { label: "Blessy Stephen: +91 77368 59869", href: "tel:+917736859869" },
+      { label: "Adhi Narayanan: +91 70126 84869", href: "tel:+917012684869" },
+    ],
   },
   {
     icon: <MapPinIcon />,
@@ -76,9 +64,12 @@ const CONTACT = [
 ];
 
 const SOCIALS = [
-  { icon: <InstagramIcon />, href: "#", label: "Instagram" },
-  { icon: <TwitterIcon />, href: "#", label: "Twitter" },
-  { icon: <LinkedinIcon />, href: "#", label: "LinkedIn" },
+  {
+    icon: <InstagramIcon />,
+    href: "https://www.instagram.com/odyssey.cec",
+    label: "Instagram",
+    external: true,
+  }
 ];
 
 export default function Footer() {
@@ -109,7 +100,19 @@ export default function Footer() {
               {CONTACT.map((item, i) => (
                 <li key={i} className={styles.contactItem}>
                   <span className={styles.contactIcon}>{item.icon}</span>
-                  {item.href ? (
+                  {item.lines ? (
+                    <span className={styles.contactStack}>
+                      {item.lines.map((line) => (
+                        <a
+                          key={line.href}
+                          href={line.href}
+                          className={styles.contactLink}
+                        >
+                          {line.label}
+                        </a>
+                      ))}
+                    </span>
+                  ) : item.href ? (
                     <a href={item.href} className={styles.contactLink}>
                       {item.label}
                     </a>
@@ -127,6 +130,9 @@ export default function Footer() {
                   href={social.href}
                   className={styles.social}
                   aria-label={social.label}
+                  {...(social.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
                 >
                   {social.icon}
                 </a>

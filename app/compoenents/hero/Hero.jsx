@@ -40,7 +40,9 @@ export default function Hero() {
               </p>
 
               <a
-                href="#register"
+                href="https://makemypass.com/event/odyssey"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`${styles.heroCtaPlaque} ${styles.animReveal} ${styles.animDelay4}`}
               >
                 <div className={styles.plaqueOuter}>

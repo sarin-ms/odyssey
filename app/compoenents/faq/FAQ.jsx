@@ -209,8 +209,8 @@ export default function FAQ() {
             </span>
             <p>
               Still looking for a bearing? Write to{" "}
-              <a href="mailto:iedcbootcampcec@ceconline.edu">
-                iedcbootcampcec@ceconline.edu
+              <a href="mailto:odysseycec2026@gmail.com">
+                odysseycec2026@gmail.com
               </a>
               .
             </p>

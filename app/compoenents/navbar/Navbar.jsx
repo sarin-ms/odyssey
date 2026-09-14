@@ -181,7 +181,9 @@ export default function Navbar() {
         })}
         <li>
           <a
-            href="#register"
+            href="https://makemypass.com/event/odyssey"
+            target="_blank"
+            rel="noopener noreferrer"
             className={styles.registerBtn}
             onClick={closeMenu}
           >
