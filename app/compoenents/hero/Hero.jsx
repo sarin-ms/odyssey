@@ -1,4 +1,5 @@
 import Image from "next/image";
+import RegistrationLink from "../registration/RegistrationLink";
 import styles from "./Hero.module.css";
 import horseImg from "@/public/assets/horse_half.webp";
 import heroBg from "@/public/assets/odyssey_hero.webp";
@@ -39,8 +40,7 @@ export default function Hero() {
                 A CREATIVE EXPEDITION FOR CURIOUS MINDS.
               </p>
 
-              <a
-                href="https://makemypass.com/event/odyssey"
+              <RegistrationLink
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${styles.heroCtaPlaque} ${styles.animReveal} ${styles.animDelay4}`}
@@ -60,7 +60,7 @@ export default function Hero() {
                     <span className={styles.plaqueArrow}>→</span>
                   </div>
                 </div>
-              </a>
+              </RegistrationLink>
             </div>
 
             <div className={styles.heroImageWrapper}>

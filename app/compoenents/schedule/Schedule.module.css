@@ -953,3 +953,126 @@
 .cardBottom .cardBody {
   order: 1;
 }
+
+/* Show a small, fixed preview until the full itinerary is released. */
+.viewportPreview {
+  overflow: hidden;
+  overscroll-behavior-x: contain;
+  touch-action: pan-y;
+}
+
+.viewportPreview .track {
+  width: 100%;
+  min-height: 430px;
+  justify-content: center;
+  padding-inline: clamp(24px, 6vw, 90px);
+  transform: none !important;
+  will-change: auto;
+}
+
+.viewportPreview .col:nth-child(n + 3) {
+  display: none;
+}
+
+.previewVeil {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  display: flex;
+  width: clamp(280px, 52%, 680px);
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: clamp(28px, 7vw, 96px);
+  pointer-events: none;
+}
+
+.previewVeil::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(239, 231, 218, 0.16) 30%,
+    rgba(239, 231, 218, 0.72) 100%
+  );
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.35) 32%, #000 78%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.35) 32%, #000 78%);
+}
+
+.previewLockGroup {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.previewLock {
+  box-sizing: content-box;
+  width: clamp(34px, 4vw, 48px);
+  height: clamp(34px, 4vw, 48px);
+  padding: 11px;
+  border: 1px solid rgba(53, 106, 106, 0.2);
+  border-radius: 50%;
+  color: var(--sea-deep);
+  background: rgba(247, 240, 228, 0.82);
+  box-shadow: 0 10px 28px rgba(35, 72, 74, 0.18);
+  filter: drop-shadow(0 3px 8px rgba(35, 72, 74, 0.12));
+}
+
+.previewMessage {
+  width: max-content;
+  max-width: 190px;
+  padding: 8px 11px;
+  border: 1px solid rgba(53, 106, 106, 0.16);
+  border-radius: 9px;
+  color: var(--sea-deep);
+  background: rgba(247, 240, 228, 0.92);
+  box-shadow: 0 8px 24px rgba(35, 72, 74, 0.14);
+  font-family: var(--font-body);
+  font-size: clamp(0.68rem, 1.2vw, 0.78rem);
+  font-weight: 650;
+  line-height: 1.35;
+  text-align: center;
+  animation: previewMessageIn 180ms ease-out both;
+}
+
+@keyframes previewMessageIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .viewportPreview .track {
+    --col: min(80vw, 280px);
+    min-height: 410px;
+    padding-inline: clamp(14px, 4vw, 36px);
+  }
+
+  .viewportPreview .col:nth-child(n + 2) {
+    display: none;
+  }
+
+  .previewVeil {
+    width: 68%;
+    padding-right: clamp(16px, 6vw, 28px);
+  }
+
+  .previewLock {
+    width: 32px;
+    height: 32px;
+    padding: 9px;
+  }
+}

@@ -280,6 +280,8 @@ const VoyageShip = () => (
   </svg>
 );
 
+const SCHEDULE_OPENS_AT = Date.parse("2026-09-20T09:00:00+05:30");
+
 export default function Schedule() {
   const wrapperRef = useRef(null);
   const stageRef = useRef(null);
@@ -287,10 +289,52 @@ export default function Schedule() {
   const trackRef = useRef(null);
   const progressRef = useRef(null);
   const progressTrackRef = useRef(null);
+  const scheduleMessageTimerRef = useRef(null);
+  const touchStartRef = useRef({ x: 0, y: 0 });
+  const touchNotifiedRef = useRef(false);
 
   const [metrics, setMetrics] = useState({ scrollLen: 0, stageH: 0 });
   const [pinned, setPinned] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [scheduleLocked, setScheduleLocked] = useState(true);
+  const [scheduleMessageVisible, setScheduleMessageVisible] = useState(false);
+
+  useEffect(() => {
+    const remaining = SCHEDULE_OPENS_AT - Date.now();
+
+    if (remaining <= 0) {
+      const frame = requestAnimationFrame(() => setScheduleLocked(false));
+      return () => cancelAnimationFrame(frame);
+    }
+
+    const timer = window.setTimeout(
+      () => setScheduleLocked(false),
+      remaining + 50,
+    );
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(
+    () => () => {
+      if (scheduleMessageTimerRef.current) {
+        window.clearTimeout(scheduleMessageTimerRef.current);
+      }
+    },
+    [],
+  );
+
+  const showScheduleMessage = useCallback(() => {
+    setScheduleMessageVisible(true);
+
+    if (scheduleMessageTimerRef.current) {
+      window.clearTimeout(scheduleMessageTimerRef.current);
+    }
+
+    scheduleMessageTimerRef.current = window.setTimeout(
+      () => setScheduleMessageVisible(false),
+      3000,
+    );
+  }, []);
 
   const renderVoyageProgress = useCallback((value) => {
     const progress = clamp(value, 0, 1);
@@ -312,12 +356,12 @@ export default function Schedule() {
       "(min-width: 1100px) and (min-height: 680px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
     );
 
-    const sync = () => setPinned(ok.matches);
+    const sync = () => setPinned(!scheduleLocked && ok.matches);
     sync();
 
     ok.addEventListener("change", sync);
     return () => ok.removeEventListener("change", sync);
-  }, []);
+  }, [scheduleLocked]);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -354,11 +398,17 @@ export default function Schedule() {
     };
   }, [measure, pinned]);
 
-
   useEffect(() => {
     const track = trackRef.current;
     const viewport = viewportRef.current;
     if (!track || !viewport) return;
+
+    if (scheduleLocked) {
+      track.style.transform = "";
+      viewport.scrollLeft = 0;
+      renderVoyageProgress(0);
+      return;
+    }
 
     let raf = 0;
 
@@ -368,7 +418,6 @@ export default function Schedule() {
       if (pinned) {
         const wrap = wrapperRef.current;
         if (!wrap) return;
-
 
         const travel = wrap.offsetHeight - metrics.stageH;
         const progress =
@@ -401,7 +450,13 @@ export default function Schedule() {
       scrollTarget.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, [pinned, metrics.scrollLen, metrics.stageH, renderVoyageProgress]);
+  }, [
+    scheduleLocked,
+    pinned,
+    metrics.scrollLen,
+    metrics.stageH,
+    renderVoyageProgress,
+  ]);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -429,6 +484,62 @@ export default function Schedule() {
     return () => observer.disconnect();
   }, []);
 
+  const resetPreviewToStart = useCallback(() => {
+    if (viewportRef.current) {
+      viewportRef.current.scrollLeft = 0;
+    }
+    showScheduleMessage();
+  }, [showScheduleMessage]);
+
+  const handlePreviewScroll = () => {
+    if (scheduleLocked && viewportRef.current?.scrollLeft) {
+      resetPreviewToStart();
+    }
+  };
+
+  const handlePreviewWheel = (event) => {
+    if (!scheduleLocked) return;
+
+    const horizontalDelta = Math.abs(event.deltaX);
+    const verticalDelta = Math.abs(event.deltaY);
+    const horizontalIntent = event.shiftKey
+      ? horizontalDelta > 1 || verticalDelta > 1
+      : horizontalDelta > 2 && horizontalDelta > verticalDelta;
+
+    if (horizontalIntent) resetPreviewToStart();
+  };
+
+  const handlePreviewTouchStart = (event) => {
+    const touch = event.touches[0];
+    if (!touch) return;
+
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+    touchNotifiedRef.current = false;
+  };
+
+  const handlePreviewTouchMove = (event) => {
+    if (!scheduleLocked || touchNotifiedRef.current) return;
+
+    const touch = event.touches[0];
+    if (!touch) return;
+
+    const horizontalDistance = Math.abs(
+      touch.clientX - touchStartRef.current.x,
+    );
+    const verticalDistance = Math.abs(touch.clientY - touchStartRef.current.y);
+
+    if (horizontalDistance <= 12 || horizontalDistance <= verticalDistance) {
+      return;
+    }
+
+    touchNotifiedRef.current = true;
+    resetPreviewToStart();
+  };
+
+  const handlePreviewTouchEnd = () => {
+    touchNotifiedRef.current = false;
+  };
+
   const v = visible ? styles.visible : "";
 
   return (
@@ -441,7 +552,11 @@ export default function Schedule() {
           ? { height: `${metrics.stageH + metrics.scrollLen}px` }
           : undefined
       }
-      aria-label="Odyssey event voyage schedule"
+      aria-label={
+        scheduleLocked
+          ? "Odyssey event schedule preview"
+          : "Odyssey event voyage schedule"
+      }
     >
       <div
         className={`${styles.stage} ${pinned ? styles.stagePinned : ""}`}
@@ -471,21 +586,39 @@ export default function Schedule() {
             className={`${styles.scrollHint} ${styles.fadeUp} ${v} ${styles.delay3}`}
             id="schedule-instructions"
           >
-            {pinned
-              ? "Keep scrolling to chart the full voyage"
-              : "Swipe or scroll sideways to explore all 15 stops"}
-            <span aria-hidden="true">→</span>
+            {scheduleLocked
+              ? "Schedule preview — full voyage will be revealed soon"
+              : pinned
+                ? "Keep scrolling to chart the full voyage"
+                : "Swipe or scroll sideways to explore all 15 stops"}
+            {!scheduleLocked && <span aria-hidden="true">→</span>}
           </p>
         </div>
 
         <div
           className={`${styles.viewport} ${
-            pinned ? styles.viewportPinned : styles.viewportFree
+            scheduleLocked
+              ? styles.viewportPreview
+              : pinned
+                ? styles.viewportPinned
+                : styles.viewportFree
           }`}
           ref={viewportRef}
-          tabIndex={pinned ? undefined : 0}
-          aria-label={pinned ? undefined : "Scrollable voyage timeline"}
+          tabIndex={!scheduleLocked && !pinned ? 0 : undefined}
+          aria-label={
+            scheduleLocked
+              ? "Schedule preview"
+              : !pinned
+                ? "Scrollable voyage timeline"
+                : undefined
+          }
           aria-describedby="schedule-instructions"
+          onScroll={handlePreviewScroll}
+          onWheel={handlePreviewWheel}
+          onTouchStart={handlePreviewTouchStart}
+          onTouchMove={handlePreviewTouchMove}
+          onTouchEnd={handlePreviewTouchEnd}
+          onTouchCancel={handlePreviewTouchEnd}
         >
           <ol className={`${styles.track} ${v}`} ref={trackRef}>
             {BLOCKS.map((block, i) => {
@@ -533,6 +666,38 @@ export default function Schedule() {
               );
             })}
           </ol>
+
+          {scheduleLocked && (
+            <div className={styles.previewVeil}>
+              <div className={styles.previewLockGroup}>
+                <svg
+                  className={styles.previewLock}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  role="img"
+                  aria-label="The remaining schedule is locked"
+                >
+                  <rect x="5" y="10" width="14" height="11" rx="2.5" />
+                  <path d="M8.5 10V7.5a3.5 3.5 0 0 1 7 0V10" />
+                  <path d="M12 14.5v2.5" />
+                </svg>
+
+                {scheduleMessageVisible && (
+                  <span
+                    className={styles.previewMessage}
+                    role="status"
+                    aria-live="polite"
+                  >
+                    Schedule will be revealed soon
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
         </div>
 
         <div

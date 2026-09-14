@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import RegistrationLink from "../registration/RegistrationLink";
 import styles from "./Navbar.module.css";
 
 const NAV_ITEMS = [
@@ -180,15 +181,14 @@ export default function Navbar() {
           );
         })}
         <li>
-          <a
-            href="https://makemypass.com/event/odyssey"
+          <RegistrationLink
             target="_blank"
             rel="noopener noreferrer"
             className={styles.registerBtn}
             onClick={closeMenu}
           >
             Register <span aria-hidden="true">→</span>
-          </a>
+          </RegistrationLink>
         </li>
       </ul>
 

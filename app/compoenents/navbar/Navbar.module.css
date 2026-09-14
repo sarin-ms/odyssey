@@ -241,8 +241,8 @@
     border: 0;
     visibility: hidden;
     opacity: 0;
-    background: rgba(34, 25, 19, 0.34);
-    backdrop-filter: blur(2px);
+    background: rgba(34, 25, 19, 0.52);
+    backdrop-filter: blur(4px);
     cursor: default;
     pointer-events: none;
     transition:
@@ -262,6 +262,7 @@
     top: 0;
     right: 0;
     z-index: 108;
+    isolation: isolate;
     width: min(84vw, 340px);
     height: 100vh;
     height: 100dvh;
@@ -273,10 +274,15 @@
     justify-content: center;
     align-items: stretch;
     gap: 8px;
-    background:
-      linear-gradient(rgba(53, 106, 106, 0.025) 1px, transparent 1px) 0 0 / 100% 24px,
-      rgba(247, 241, 232, 0.985);
-    box-shadow: -12px 0 42px rgba(34, 25, 19, 0.16);
+    opacity: 1;
+    background-color: #f7f1e8;
+    background-image: linear-gradient(
+      rgba(53, 106, 106, 0.025) 1px,
+      transparent 1px
+    );
+    background-position: 0 0;
+    background-size: 100% 24px;
+    box-shadow: -12px 0 42px rgba(34, 25, 19, 0.2);
     transform: translate3d(105%, 0, 0);
     pointer-events: none;
     transition:
@@ -338,8 +344,12 @@
   }
 
   .navLinks {
-    width: min(88vw, 330px);
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
     padding-inline: 24px;
+    box-shadow: none;
   }
 }
 
