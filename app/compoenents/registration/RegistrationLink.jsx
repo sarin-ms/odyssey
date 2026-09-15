@@ -95,7 +95,7 @@ export default function RegistrationLink({
         aria-disabled={locked || undefined}
         title={
           locked
-            ? "Registration opens on 15 September at 6:00 PM IST"
+            ? "Registration opens on 15 September at 8:00 PM IST"
             : title
         }
       >
