@@ -597,6 +597,10 @@
 }
 
 @media (max-width: 720px) {
+
+  .handwritten {
+    display:none;
+  }
   .prizepoolSection {
     padding-inline: 12px;
   }
