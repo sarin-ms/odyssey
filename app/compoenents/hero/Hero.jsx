@@ -25,7 +25,7 @@ export default function Hero() {
               <p
                 className={`${styles.heroSubtitle} ${styles.animReveal} ${styles.animDelay1}`}
               >
-                IEDC BOOTCAMP CEC × μLEARN CHN
+                IEDC BOOTCAMP CEC × μLearn CHN
               </p>
               <h1
                 className={`${styles.heroTitle} ${styles.animReveal} ${styles.animDelay2}`}
