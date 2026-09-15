@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./RegistrationLink.module.css";
 
 const REGISTRATION_URL = "https://makemypass.com/event/odyssey";
-const REGISTRATION_OPENS_AT = Date.parse("2026-09-15T18:00:00+05:30");
+const REGISTRATION_OPENS_AT = Date.parse("2026-09-15T20:00:00+05:30");
 const NOTICE_DURATION = 3600;
 
 function LockIcon({ className }) {
