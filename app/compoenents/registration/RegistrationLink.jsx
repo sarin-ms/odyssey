@@ -109,7 +109,7 @@ export default function RegistrationLink({
           </span>
           <span className={styles.noticeCopy}>
             <strong>Registration not started yet</strong>
-            <small>Opens 15 September at 6:00 PM IST</small>
+            <small>Opens 15 September at 8:00 PM IST</small>
           </span>
         </span>
       )}
