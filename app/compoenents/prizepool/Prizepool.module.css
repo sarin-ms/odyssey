@@ -601,6 +601,14 @@
   .handwritten {
     display:none;
   }
+
+  .amountRule {
+  display: block;
+  width: 38px;
+  height: 2px;
+  margin: 2px 0 19px;
+  }
+  
   .prizepoolSection {
     padding-inline: 12px;
   }
