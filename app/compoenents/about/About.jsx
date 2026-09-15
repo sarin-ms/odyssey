@@ -21,7 +21,7 @@ const STATS = [
   },
   {
     id: "participants",
-    value: "150+ Participants",
+    value: "60 Participants",
     label: "Students and innovators from higher education institutions",
     icon: (
       <GraduationCap size={18} strokeWidth={1.8} className={styles.statSvg} />
