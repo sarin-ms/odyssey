@@ -21,7 +21,7 @@ const ORGANIZERS = [
     name: "μLearn CHN",
     role: "Student-Driven Technology Community",
     description:
-      "μLearn CHN is a student-driven technology and learning community focused on enabling students to learn, collaborate, build, and engage with the wider developer ecosystem. Through technical initiatives, workshops, community activities, and hands-on experiences, μLearn CHN encourages students to transform knowledge into practical skills and meaningful projects.",
+      "µLearn CHN is the official µLearn community chapter of the College of Engineering Chengannur (CEC), powered by GTech. Built on a culture of learning, collaboration, and innovation, it empowers learners, builders, and creators through peer learning, hands-on experiences, workshops, challenges, and community-led initiatives. By transforming ideas into real-world solutions, µLearn CHN nurtures innovators, problem-solvers, and future founders.",
     logo: "/assets/mulearn.webp",
     logoW: 159,
     logoH: 55,
