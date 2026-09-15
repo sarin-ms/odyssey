@@ -99,6 +99,7 @@
 
 .logoCard {
   display: flex;
+  width: clamp(120px, 18vw, 150px);
   flex-direction: column;
   align-items: center;
   gap: 14px;
@@ -148,6 +149,10 @@
   height: clamp(38px, 5.6vw, 52px);
   max-width: 100%;
   object-fit: contain;
+}
+
+.mulearnLogo {
+  transform: scale(3.1);
 }
 
 .logoImageWide {

@@ -22,9 +22,9 @@ const ORGANIZERS = [
     role: "Student-Driven Technology Community",
     description:
       "µLearn CHN is the official µLearn community chapter of the College of Engineering Chengannur (CEC), powered by GTech. Built on a culture of learning, collaboration, and innovation, it empowers learners, builders, and creators through peer learning, hands-on experiences, workshops, challenges, and community-led initiatives. By transforming ideas into real-world solutions, µLearn CHN nurtures innovators, problem-solvers, and future founders.",
-    logo: "/assets/mulearn.webp",
-    logoW: 159,
-    logoH: 55,
+    logo: "/assets/mulearn.svg",
+    logoW: 288,
+    logoH: 288,
   },
 ];
 
@@ -69,7 +69,9 @@ export default function Organizers() {
                     alt={`${org.name} logo`}
                     width={org.logoW}
                     height={org.logoH}
-                    className={styles.logoImage}
+                    className={`${styles.logoImage} ${
+                      org.id === "mulearn" ? styles.mulearnLogo : ""
+                    }`}
                   />
                 </div>
                 <div className={styles.orgContent}>

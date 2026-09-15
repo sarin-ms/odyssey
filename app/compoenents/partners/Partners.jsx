@@ -15,11 +15,11 @@ const ORGANIZER_LOGOS = [
     h: 73,
   },
   {
-    src: "/assets/mulearn.webp",
+    src: "/assets/mulearn.svg",
     alt: "μLearn CHN logo",
     label: "μLearn CHN",
-    w: 159,
-    h: 55,
+    w: 288,
+    h: 288,
   },
 ];
 
@@ -69,7 +69,11 @@ export default function Partners() {
                       alt={logo.alt}
                       width={logo.w}
                       height={logo.h}
-                      className={styles.logoImage}
+                      className={`${styles.logoImage} ${
+                        logo.src === "/assets/mulearn.svg"
+                          ? styles.mulearnLogo
+                          : ""
+                      }`}
                     />
                   </div>
                   <p className={styles.logoLabel}>{logo.label}</p>

@@ -82,7 +82,7 @@
   font-size: clamp(0.62rem, 1.5vw, 0.72rem);
   font-weight: 600;
   letter-spacing: 0.22em;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   color: #8a6a35;
   margin-bottom: clamp(7px, 1.1vw, 11px);
 }

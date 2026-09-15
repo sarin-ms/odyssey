@@ -130,6 +130,10 @@
   object-fit: contain;
 }
 
+.mulearnLogo {
+  transform: scale(3.1);
+}
+
 .orgContent {
   display: flex;
   flex-direction: column;
