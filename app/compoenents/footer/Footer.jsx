@@ -82,7 +82,7 @@ export default function Footer() {
         <div className={styles.top}>
           <div className={styles.brand}>
             <p className={styles.eyebrow}>
-              IEDC BOOTCAMP CEC × <span className={styles.mu}>μ</span>LEARN CHN
+              IEDC BOOTCAMP CEC × <span className={styles.mu}>μ</span>Learn CHN
             </p>
             <h2 className={styles.wordmark}>ODYSSEY</h2>
             <span className={styles.brandRule} aria-hidden="true" />
