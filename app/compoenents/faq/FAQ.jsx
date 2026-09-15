@@ -17,7 +17,7 @@ const FAQS = [
     question: "What is the team size and theme?",
     answer: (
       <p>
-        Teams can have 1–4 members. ODYSSEY follows an open-theme format,
+        Teams can have 2–4 members. ODYSSEY follows an open-theme format,
         allowing participants to work on problems across software, hardware,
         AI, and emerging technologies.
       </p>
