@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: "/register",
+        destination: "https://makemypass.com/event/odyssey",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
