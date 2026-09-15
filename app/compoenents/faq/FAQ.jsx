@@ -146,7 +146,7 @@ export default function FAQ() {
               </div>
               <div>
                 <dt>Crew</dt>
-                <dd>1–4 members</dd>
+                <dd>2–4 members</dd>
               </div>
               <div>
                 <dt>Dates</dt>
