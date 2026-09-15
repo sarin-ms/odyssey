@@ -645,18 +645,6 @@
 }
 
 @media (max-width: 720px) {
-
-  .handwritten {
-    display:none;
-  }
-
-  .amountRule {
-  display: block;
-  width: 38px;
-  height: 2px;
-  margin: 2px 0 19px;
-  }
-  
   .prizepoolSection {
     padding-inline: 12px;
   }
@@ -671,19 +659,34 @@
   }
 
   .treasuryContent {
-    padding: 42px 24px 0;
+    padding: 36px 22px 0;
   }
 
   .postmark {
-    top: 35px;
-    right: 20px;
-    transform: rotate(-7deg) scale(0.82);
+    top: 32px;
+    right: 18px;
+    transform: rotate(-7deg) scale(0.78);
     transform-origin: top right;
   }
 
   .destinationKicker {
-    margin-bottom: 31px;
+    margin-bottom: 24px;
     letter-spacing: 0.23em;
+  }
+
+  .amountComposition {
+    width: 100%;
+    margin-bottom: 22px;
+  }
+
+  .prizeAmount {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px 9px;
+    text-align: center;
   }
 
   .amount {
@@ -691,19 +694,31 @@
   }
 
   .currency {
+    flex: 0 0 auto;
     font-size: clamp(1.9rem, 8vw, 2.7rem);
   }
 
-  .handwritten {
-    top: calc(100% + 7px);
-    right: 0;
-    left: auto;
-    width: 150px;
-    transform: rotate(-7deg);
+  .amountLabel {
+    flex: 0 0 100%;
+    width: 100%;
+    margin-top: 5px;
+    padding-left: 0;
+    text-align: center;
   }
 
-  .amountComposition {
-    margin-bottom: 62px;
+  .amountLabel.mysteryLabel {
+    font-size: clamp(0.56rem, 2.6vw, 0.68rem);
+    letter-spacing: 0.2em;
+    white-space: normal;
+  }
+
+  .handwritten {
+    display: none;
+  }
+
+  .amountRule {
+    width: 42px;
+    margin: 2px auto 20px;
   }
 
   .awardKinds li {
