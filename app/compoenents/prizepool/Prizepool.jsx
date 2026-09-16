@@ -190,24 +190,16 @@ export default function Prizepool() {
                 <h2
                   className={styles.prizeAmount}
                   id="prize-title"
-                  aria-label="Prize pool amount will be revealed soon"
+                  aria-label="15,000 Indian rupees in prizes"
                 >
                   <span className={styles.currency} aria-hidden="true">
                     ₹
                   </span>
-                  <span
-                    className={`${styles.amount} ${styles.mysteryAmount}`}
-                    aria-hidden="true"
-                  >
-                    <span>?</span>
-                    <span>?</span>
-                    <span>?</span>
+                  <span className={styles.amount} aria-hidden="true">
+                    15,000
                   </span>
-                  <span
-                    className={`${styles.amountLabel} ${styles.mysteryLabel}`}
-                    aria-hidden="true"
-                  >
-                    PRIZE POOL · REVEALING SOON
+                  <span className={styles.amountLabel} aria-hidden="true">
+                    IN PRIZES
                   </span>
                 </h2>
 
