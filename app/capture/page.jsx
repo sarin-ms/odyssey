@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
-import { Upload, Download, Share2, ImagePlus } from "lucide-react";
+import { Upload, Download, Share2, ImagePlus, Camera } from "lucide-react";
 import styles from "./Capture.module.css";
 
 /* ─── Frame configuration ──────────────────────────────────────────────── */
@@ -121,6 +121,7 @@ export default function CapturePage() {
   const [dragOver, setDragOver] = useState(false);
   const [toast, setToast] = useState("");
   const fileInputRef = useRef(null);
+  const cameraInputRef = useRef(null);
   const canvasRef = useRef(null); // keep reference to the output canvas
 
   /* ── Show toast ────────────────────────────────────────────────── */
@@ -251,6 +252,7 @@ export default function CapturePage() {
     setResultUrl(null);
     canvasRef.current = null;
     if (fileInputRef.current) fileInputRef.current.value = "";
+    if (cameraInputRef.current) cameraInputRef.current.value = "";
   };
 
   /* ── Render ────────────────────────────────────────────────────── */
@@ -295,34 +297,60 @@ export default function CapturePage() {
 
         {/* Upload zone — shown when no photo selected */}
         {!photo && (
-          <div
-            className={`${styles.uploadZone} ${dragOver ? styles.dragOver : ""} ${styles.animateIn} ${styles.animDelay3}`}
-            onDragOver={(e) => {
-              e.preventDefault();
-              setDragOver(true);
-            }}
-            onDragLeave={() => setDragOver(false)}
-            onDrop={onDrop}
-            onClick={() => fileInputRef.current?.click()}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") fileInputRef.current?.click();
-            }}
-          >
-            <div className={styles.uploadIcon}>
-              <Upload size={24} strokeWidth={1.8} />
+          <div className={`${styles.uploadGroup} ${styles.animateIn} ${styles.animDelay3}`}>
+            <div
+              className={`${styles.uploadZone} ${dragOver ? styles.dragOver : ""}`}
+              onDragOver={(e) => {
+                e.preventDefault();
+                setDragOver(true);
+              }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={onDrop}
+              onClick={() => fileInputRef.current?.click()}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") fileInputRef.current?.click();
+              }}
+            >
+              <div className={styles.uploadIcon}>
+                <Upload size={24} strokeWidth={1.8} />
+              </div>
+              <p className={styles.uploadLabel}>
+                Drag & drop your photo here, or <strong>browse</strong>
+              </p>
+              <span className={styles.uploadHint}>
+                Supports JPG, PNG, WebP — max 20 MB
+              </span>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className={styles.hiddenInput}
+                onChange={onFileChange}
+                tabIndex={-1}
+              />
             </div>
-            <p className={styles.uploadLabel}>
-              Drag & drop your photo here, or <strong>browse</strong>
-            </p>
-            <span className={styles.uploadHint}>
-              Supports JPG, PNG, WebP — max 20 MB
-            </span>
+
+            <div className={styles.uploadDivider}>
+              <span className={styles.dividerLine} />
+              <span className={styles.dividerText}>or</span>
+              <span className={styles.dividerLine} />
+            </div>
+
+            <button
+              type="button"
+              className={styles.cameraBtn}
+              onClick={() => cameraInputRef.current?.click()}
+            >
+              <Camera size={20} strokeWidth={1.8} />
+              Take a Photo
+            </button>
             <input
-              ref={fileInputRef}
+              ref={cameraInputRef}
               type="file"
               accept="image/*"
+              capture="environment"
               className={styles.hiddenInput}
               onChange={onFileChange}
               tabIndex={-1}
