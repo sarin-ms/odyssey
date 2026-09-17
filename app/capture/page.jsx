@@ -8,21 +8,33 @@ import styles from "./Capture.module.css";
 /* ─── Frame configuration ──────────────────────────────────────────────── */
 
 const FRAMES = {
-  "4:3": {
-    src: "/frames/frame_43.png",
-    width: 1448,
-    height: 1086,
-    // Inner photo region — measured via pixel analysis (light-gray fill, no alpha)
-    photo: { x: 238, y: 208, w: 971, h: 646 },
-    hasAlpha: false,
+  "Story (Solo)": {
+    src: "/frames/Template 1080_1920 (Single).png",
+    width: 1080,
+    height: 1920,
+    photo: { x: 160, y: 703, w: 760, h: 772 },
+    nameY: 1545,
   },
-  "9:16": {
-    src: "/frames/frame_916.png",
-    width: 941,
-    height: 1672,
-    // Inner photo region — measured via pixel analysis (transparent center)
-    photo: { x: 128, y: 293, w: 688, h: 1014 },
-    hasAlpha: true,
+  "Story (Team)": {
+    src: "/frames/Template 1080_1920 (Double).png",
+    width: 1080,
+    height: 1920,
+    photo: { x: 90, y: 788, w: 899, h: 641 },
+    nameY: 1541,
+  },
+  "Post (Solo)": {
+    src: "/frames/Template 1080_1350 (Single).png",
+    width: 1080,
+    height: 1350,
+    photo: { x: 215, y: 500, w: 649, h: 627 },
+    nameY: 1222,
+  },
+  "Post (Team)": {
+    src: "/frames/Template 1080_1350 (Double).png",
+    width: 1080,
+    height: 1350,
+    photo: { x: 90, y: 507, w: 899, h: 570 },
+    nameY: 1179,
   },
 };
 
@@ -60,7 +72,7 @@ function coverFit(photoImg, region) {
 
 /* ─── Helper: composite photo + frame on canvas ───────────────────────── */
 
-async function composite(photoDataUrl, frameKey) {
+async function composite(photoDataUrl, frameKey, userName) {
   const frame = FRAMES[frameKey];
   const [photoImg, frameImg] = await Promise.all([
     loadImage(photoDataUrl),
@@ -75,37 +87,36 @@ async function composite(photoDataUrl, frameKey) {
   const { x, y, w, h } = frame.photo;
   const { drawX, drawY, drawW, drawH } = coverFit(photoImg, frame.photo);
 
-  if (frame.hasAlpha) {
-    // 9:16 frame has a transparent center — draw photo first, frame on top
-    ctx.save();
-    ctx.beginPath();
-    ctx.roundRect(x, y, w, h, 16);
-    ctx.clip();
-    ctx.drawImage(photoImg, drawX, drawY, drawW, drawH);
-    ctx.restore();
+  // Frames are opaque — punch out the inner region and draw photo behind
+  ctx.drawImage(frameImg, 0, 0, frame.width, frame.height);
 
-    ctx.drawImage(frameImg, 0, 0, frame.width, frame.height);
-  } else {
-    // 4:3 frame is fully opaque with a gray inner fill.
-    // Strategy: draw frame → punch out inner region → draw photo behind.
-    ctx.drawImage(frameImg, 0, 0, frame.width, frame.height);
+  // Clear the inner region
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(x, y, w, h);
+  ctx.clip();
+  ctx.clearRect(x, y, w, h);
+  ctx.restore();
 
-    // Clear the inner region so the photo can show through
-    ctx.save();
-    ctx.beginPath();
-    ctx.roundRect(x, y, w, h, 16);
-    ctx.clip();
-    ctx.clearRect(x, y, w, h);
-    ctx.restore();
+  // Draw photo behind the frame
+  ctx.save();
+  ctx.globalCompositeOperation = "destination-over";
+  ctx.beginPath();
+  ctx.rect(x, y, w, h);
+  ctx.clip();
+  ctx.drawImage(photoImg, drawX, drawY, drawW, drawH);
+  ctx.restore();
 
-    // Draw the photo behind the frame using destination-over
-    ctx.save();
-    ctx.globalCompositeOperation = "destination-over";
-    ctx.beginPath();
-    ctx.roundRect(x, y, w, h, 16);
-    ctx.clip();
-    ctx.drawImage(photoImg, drawX, drawY, drawW, drawH);
-    ctx.restore();
+  // Render user's name over the "NAME HERE" placeholder
+  if (userName && userName.trim()) {
+    const nameText = userName.trim().toUpperCase();
+    const fontSize = Math.round(frame.width * 0.037);
+    ctx.font = `700 ${fontSize}px "Inter", "Cinzel", sans-serif`;
+    ctx.fillStyle = "#fffaf1";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.letterSpacing = `${fontSize * 0.15}px`;
+    ctx.fillText(nameText, frame.width / 2, frame.nameY);
   }
 
   return canvas;
@@ -115,15 +126,16 @@ async function composite(photoDataUrl, frameKey) {
 
 export default function CapturePage() {
   const [photo, setPhoto] = useState(null); // data URL of uploaded photo
-  const [selectedFrame, setSelectedFrame] = useState("4:3");
+  const [selectedFrame, setSelectedFrame] = useState("Story (Solo)");
   const [resultUrl, setResultUrl] = useState(null);
   const [processing, setProcessing] = useState(false);
   const [dragOver, setDragOver] = useState(false);
   const [toast, setToast] = useState("");
+  const [userName, setUserName] = useState("");
   const [webcamOpen, setWebcamOpen] = useState(false);
-  const [facingMode, setFacingMode] = useState("user"); // "user" = front, "environment" = back
+  const [facingMode, setFacingMode] = useState("user");
   const fileInputRef = useRef(null);
-  const canvasRef = useRef(null); // keep reference to the output canvas
+  const canvasRef = useRef(null);
   const videoRef = useRef(null);
   const streamRef = useRef(null);
 
@@ -159,7 +171,7 @@ export default function CapturePage() {
     setResultUrl(null);
 
     try {
-      const canvas = await composite(photo, selectedFrame);
+      const canvas = await composite(photo, selectedFrame, userName);
       canvasRef.current = canvas;
       setResultUrl(canvas.toDataURL("image/png"));
     } catch (err) {
@@ -168,19 +180,18 @@ export default function CapturePage() {
     } finally {
       setProcessing(false);
     }
-  }, [photo, selectedFrame, showToast]);
+  }, [photo, selectedFrame, userName, showToast]);
 
   /* ── Regenerate when frame changes after photo is loaded ───────── */
   const switchFrame = useCallback(
     (key) => {
       setSelectedFrame(key);
       if (photo) {
-        // Defer so state update settles
         setTimeout(async () => {
           setProcessing(true);
           setResultUrl(null);
           try {
-            const canvas = await composite(photo, key);
+            const canvas = await composite(photo, key, userName);
             canvasRef.current = canvas;
             setResultUrl(canvas.toDataURL("image/png"));
           } catch {
@@ -191,7 +202,7 @@ export default function CapturePage() {
         }, 50);
       }
     },
-    [photo, showToast],
+    [photo, userName, showToast],
   );
 
   /* ── Download ──────────────────────────────────────────────────── */
@@ -369,9 +380,21 @@ export default function CapturePage() {
               className={`${styles.frameBtn} ${selectedFrame === key ? styles.frameBtnActive : ""}`}
               onClick={() => switchFrame(key)}
             >
-              {key} Frame
+              {key}
             </button>
           ))}
+        </div>
+
+        {/* Name input */}
+        <div className={`${styles.nameInputWrapper} ${styles.animateIn} ${styles.animDelay3}`}>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+            className={styles.nameInput}
+            maxLength={30}
+          />
         </div>
 
         {/* Upload zone — shown when no photo selected */}

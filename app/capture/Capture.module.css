@@ -262,27 +262,29 @@
 /* ── Frame selector ────────────────────────────────────────── */
 
 .frameSelector {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  width: 100%;
+  max-width: 480px;
   background: rgba(236, 226, 215, 0.52);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(160, 135, 110, 0.2);
-  border-radius: 50px;
+  border-radius: 14px;
   padding: 5px;
 }
 
 .frameBtn {
   position: relative;
-  padding: 10px 24px;
+  padding: 11px 16px;
   border: none;
-  border-radius: 50px;
+  border-radius: 10px;
   background: transparent;
   font-family: var(--font-body);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   color: var(--color-brown-dark);
   cursor: pointer;
   transition:
@@ -299,6 +301,42 @@
   background: var(--color-brown-dark);
   color: #fff;
   box-shadow: 0 4px 16px rgba(61, 43, 31, 0.18);
+}
+
+/* ── Name input ────────────────────────────────────────────── */
+
+.nameInputWrapper {
+  width: 100%;
+  max-width: 480px;
+}
+
+.nameInput {
+  width: 100%;
+  padding: 14px 20px;
+  border: 1.5px solid rgba(92, 58, 33, 0.2);
+  border-radius: 12px;
+  background: rgba(236, 226, 215, 0.35);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--color-brown-dark);
+  letter-spacing: 0.02em;
+  outline: none;
+  transition:
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.nameInput::placeholder {
+  color: #8a7565;
+  opacity: 0.65;
+}
+
+.nameInput:focus {
+  border-color: var(--color-brown-mid);
+  background: rgba(236, 226, 215, 0.55);
+  box-shadow: 0 0 0 3px rgba(92, 58, 33, 0.08);
 }
 
 /* ── Preview container ─────────────────────────────────────── */
