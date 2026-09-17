@@ -1,0 +1,506 @@
+/* ── Capture Page ────────────────────────────────────────────── */
+/* Matches the Odyssey cream / brown / warm serif palette        */
+
+.capturePage {
+  min-height: 100vh;
+  background: var(--color-cream);
+  color: var(--color-brown-dark);
+  font-family: var(--font-body);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Back link ─────────────────────────────────────────────── */
+
+.backLink {
+  position: fixed;
+  top: 24px;
+  left: 28px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  background: rgba(245, 239, 230, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(92, 58, 33, 0.12);
+  box-shadow: 0 4px 20px rgba(61, 43, 31, 0.08);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-brown-dark);
+  text-decoration: none;
+  transition:
+    background 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms var(--motion-ease-out);
+}
+
+.backLink:hover {
+  background: rgba(245, 239, 230, 0.98);
+  box-shadow: 0 6px 24px rgba(61, 43, 31, 0.14);
+  transform: translateY(-1px);
+}
+
+.backArrow {
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 220ms var(--motion-ease-out);
+}
+
+.backLink:hover .backArrow {
+  transform: translateX(-3px);
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+
+.header {
+  text-align: center;
+  padding: 100px var(--page-gutter) 32px;
+  max-width: 720px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.badgeText {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--color-brown-mid);
+  text-transform: uppercase;
+}
+
+.badgeLine {
+  width: 48px;
+  height: 1px;
+  background: var(--color-brown-mid);
+  opacity: 0.45;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: #2a1b12;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}
+
+.subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(0.92rem, 1.8vw, 1.05rem);
+  color: #5c4333;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+/* ── Main content area ─────────────────────────────────────── */
+
+.content {
+  width: 100%;
+  max-width: 860px;
+  padding: 0 var(--page-gutter) 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+/* ── Upload zone ───────────────────────────────────────────── */
+
+.uploadZone {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 56px 32px;
+  border: 2px dashed rgba(92, 58, 33, 0.25);
+  border-radius: 16px;
+  background: rgba(236, 226, 215, 0.35);
+  cursor: pointer;
+  transition:
+    border-color 280ms ease,
+    background 280ms ease,
+    transform 280ms var(--motion-ease-out);
+}
+
+.uploadZone:hover {
+  border-color: rgba(92, 58, 33, 0.45);
+  background: rgba(236, 226, 215, 0.55);
+}
+
+.uploadZone.dragOver {
+  border-color: var(--color-brown-mid);
+  background: rgba(224, 212, 198, 0.6);
+  transform: scale(1.01);
+}
+
+.uploadIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(224, 212, 198, 0.7);
+  border: 1px solid rgba(140, 110, 85, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brown-mid);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.35);
+}
+
+.uploadLabel {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--color-brown-dark);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.uploadLabel strong {
+  color: var(--color-brown-mid);
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-color: rgba(92, 58, 33, 0.3);
+  text-underline-offset: 3px;
+}
+
+.uploadHint {
+  font-size: 0.75rem;
+  color: #7a6555;
+  opacity: 0.7;
+}
+
+.hiddenInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* ── Frame selector ────────────────────────────────────────── */
+
+.frameSelector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(236, 226, 215, 0.52);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(160, 135, 110, 0.2);
+  border-radius: 50px;
+  padding: 5px;
+}
+
+.frameBtn {
+  position: relative;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 50px;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-brown-dark);
+  cursor: pointer;
+  transition:
+    background 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.frameBtn:hover:not(.frameBtnActive) {
+  background: rgba(224, 212, 198, 0.5);
+}
+
+.frameBtnActive {
+  background: var(--color-brown-dark);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(61, 43, 31, 0.18);
+}
+
+/* ── Preview container ─────────────────────────────────────── */
+
+.previewWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  animation: fadeIn 500ms var(--motion-ease-out) both;
+}
+
+.previewCard {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(236, 226, 215, 0.3);
+  border: 1px solid rgba(160, 135, 110, 0.15);
+  box-shadow:
+    0 8px 40px rgba(42, 27, 18, 0.08),
+    0 1px 3px rgba(42, 27, 18, 0.04);
+}
+
+.previewImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.previewLoading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 80px 32px;
+  color: var(--color-brown-mid);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+/* ── Spinner ───────────────────────────────────────────────── */
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(92, 58, 33, 0.15);
+  border-top-color: var(--color-brown-mid);
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Action buttons ────────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 13px 32px;
+  border: none;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 220ms ease,
+    transform 220ms var(--motion-ease-out),
+    box-shadow 220ms ease;
+}
+
+.downloadBtn {
+  color: #fff;
+  background: var(--color-brown-dark);
+  box-shadow: 0 8px 24px rgba(61, 43, 31, 0.15);
+}
+
+.downloadBtn:hover {
+  background: var(--color-brown-mid);
+  box-shadow: 0 12px 28px rgba(61, 43, 31, 0.24);
+  transform: translateY(-2px);
+}
+
+.shareBtn {
+  color: var(--color-brown-dark);
+  background: rgba(236, 226, 215, 0.65);
+  border: 1px solid rgba(160, 135, 110, 0.25);
+  box-shadow: 0 4px 16px rgba(61, 43, 31, 0.06);
+}
+
+.shareBtn:hover {
+  background: rgba(224, 212, 198, 0.9);
+  box-shadow: 0 8px 24px rgba(61, 43, 31, 0.12);
+  transform: translateY(-2px);
+}
+
+.newPhotoBtn {
+  color: var(--color-brown-mid);
+  background: transparent;
+  border: 1px dashed rgba(92, 58, 33, 0.3);
+}
+
+.newPhotoBtn:hover {
+  background: rgba(236, 226, 215, 0.45);
+  border-color: rgba(92, 58, 33, 0.5);
+}
+
+.actionIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ── Toast ─────────────────────────────────────────────────── */
+
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 200;
+  padding: 14px 28px;
+  border-radius: 50px;
+  background: var(--color-brown-dark);
+  color: #fffaf1;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  box-shadow: 0 12px 40px rgba(61, 43, 31, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 300ms ease,
+    transform 300ms var(--motion-ease-out);
+}
+
+.toastVisible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* ── Animations ────────────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animateIn {
+  animation: fadeIn 600ms var(--motion-ease-out) both;
+}
+
+.animDelay1 { animation-delay: 80ms; }
+.animDelay2 { animation-delay: 160ms; }
+.animDelay3 { animation-delay: 240ms; }
+.animDelay4 { animation-delay: 320ms; }
+
+/* ── Responsive ────────────────────────────────────────────── */
+
+@media (max-width: 680px) {
+  .header {
+    padding-top: 88px;
+    padding-bottom: 24px;
+  }
+
+  .backLink {
+    top: 18px;
+    left: 16px;
+    padding: 8px 16px;
+    font-size: 0.76rem;
+  }
+
+  .uploadZone {
+    padding: 40px 24px;
+  }
+
+  .frameSelector {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .frameBtn {
+    flex: 1;
+    text-align: center;
+    padding: 10px 16px;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .actionBtn {
+    flex: 1;
+    min-width: 0;
+    padding-inline: 20px;
+    font-size: 0.8rem;
+  }
+
+  .content {
+    gap: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .uploadZone {
+    padding: 32px 18px;
+  }
+
+  .frameBtn {
+    font-size: 0.76rem;
+    padding: 9px 12px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .actionBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .previewWrapper,
+  .animateIn {
+    animation: none;
+  }
+
+  .toast {
+    transition: none;
+  }
+
+  .backLink,
+  .backLink .backArrow,
+  .uploadZone,
+  .frameBtn,
+  .actionBtn {
+    transition: none;
+  }
+}
