@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Upload, Download, Share2, ImagePlus, Camera } from "lucide-react";
+import { Upload, Download, Share2, ImagePlus, Camera, X, SwitchCamera } from "lucide-react";
 import styles from "./Capture.module.css";
 
 /* ─── Frame configuration ──────────────────────────────────────────────── */
@@ -120,9 +120,12 @@ export default function CapturePage() {
   const [processing, setProcessing] = useState(false);
   const [dragOver, setDragOver] = useState(false);
   const [toast, setToast] = useState("");
+  const [webcamOpen, setWebcamOpen] = useState(false);
+  const [facingMode, setFacingMode] = useState("user"); // "user" = front, "environment" = back
   const fileInputRef = useRef(null);
-  const cameraInputRef = useRef(null);
   const canvasRef = useRef(null); // keep reference to the output canvas
+  const videoRef = useRef(null);
+  const streamRef = useRef(null);
 
   /* ── Show toast ────────────────────────────────────────────────── */
   const showToast = useCallback((msg) => {
@@ -246,13 +249,89 @@ export default function CapturePage() {
     }
   }, [selectedFrame, showToast, handleDownload]);
 
+  /* ── Webcam ────────────────────────────────────────────────────── */
+  const openWebcam = useCallback(async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode, width: { ideal: 1920 }, height: { ideal: 1080 } },
+        audio: false,
+      });
+      streamRef.current = stream;
+      setWebcamOpen(true);
+      // Attach stream to video element after state update
+      requestAnimationFrame(() => {
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      });
+    } catch (err) {
+      console.error("Webcam error:", err);
+      if (err.name === "NotAllowedError") {
+        showToast("Camera permission denied.");
+      } else if (err.name === "NotFoundError") {
+        showToast("No camera found on this device.");
+      } else {
+        showToast("Could not access camera.");
+      }
+    }
+  }, [facingMode, showToast]);
+
+  const closeWebcam = useCallback(() => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((t) => t.stop());
+      streamRef.current = null;
+    }
+    setWebcamOpen(false);
+  }, []);
+
+  const captureWebcam = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const c = document.createElement("canvas");
+    c.width = video.videoWidth;
+    c.height = video.videoHeight;
+    c.getContext("2d").drawImage(video, 0, 0);
+    setPhoto(c.toDataURL("image/png"));
+    setResultUrl(null);
+    closeWebcam();
+  }, [closeWebcam]);
+
+  const toggleFacingMode = useCallback(async () => {
+    const next = facingMode === "user" ? "environment" : "user";
+    setFacingMode(next);
+    // Restart stream with new facing mode
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((t) => t.stop());
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: next, width: { ideal: 1920 }, height: { ideal: 1080 } },
+        audio: false,
+      });
+      streamRef.current = stream;
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+    } catch {
+      showToast("Could not switch camera.");
+    }
+  }, [facingMode, showToast]);
+
+  // Cleanup stream on unmount
+  useEffect(() => {
+    return () => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((t) => t.stop());
+      }
+    };
+  }, []);
+
   /* ── Reset ─────────────────────────────────────────────────────── */
   const handleNewPhoto = () => {
     setPhoto(null);
     setResultUrl(null);
     canvasRef.current = null;
     if (fileInputRef.current) fileInputRef.current.value = "";
-    if (cameraInputRef.current) cameraInputRef.current.value = "";
   };
 
   /* ── Render ────────────────────────────────────────────────────── */
@@ -341,20 +420,11 @@ export default function CapturePage() {
             <button
               type="button"
               className={styles.cameraBtn}
-              onClick={() => cameraInputRef.current?.click()}
+              onClick={openWebcam}
             >
               <Camera size={20} strokeWidth={1.8} />
               Take a Photo
             </button>
-            <input
-              ref={cameraInputRef}
-              type="file"
-              accept="image/*"
-              capture="environment"
-              className={styles.hiddenInput}
-              onChange={onFileChange}
-              tabIndex={-1}
-            />
           </div>
         )}
 
@@ -439,6 +509,47 @@ export default function CapturePage() {
           </div>
         )}
       </div>
+
+      {/* Webcam modal */}
+      {webcamOpen && (
+        <div className={styles.webcamOverlay}>
+          <div className={styles.webcamContainer}>
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              muted
+              className={styles.webcamVideo}
+            />
+            <div className={styles.webcamControls}>
+              <button
+                type="button"
+                className={styles.webcamCloseBtn}
+                onClick={closeWebcam}
+                aria-label="Close camera"
+              >
+                <X size={24} />
+              </button>
+              <button
+                type="button"
+                className={styles.webcamShutter}
+                onClick={captureWebcam}
+                aria-label="Take photo"
+              >
+                <div className={styles.shutterInner} />
+              </button>
+              <button
+                type="button"
+                className={styles.webcamFlipBtn}
+                onClick={toggleFacingMode}
+                aria-label="Switch camera"
+              >
+                <SwitchCamera size={22} />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Toast notification */}
       <div className={`${styles.toast} ${toast ? styles.toastVisible : ""}`}>
