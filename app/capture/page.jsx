@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Upload, Download, Share2, ImagePlus, Camera, X, SwitchCamera } from "lucide-react";
+import { Upload, Download, Share2, ImagePlus, Camera, X, SwitchCamera, Globe } from "lucide-react";
 import styles from "./Capture.module.css";
 
 /* ─── Frame configuration ──────────────────────────────────────────────── */
@@ -134,6 +134,8 @@ export default function CapturePage() {
   const [userName, setUserName] = useState("");
   const [webcamOpen, setWebcamOpen] = useState(false);
   const [facingMode, setFacingMode] = useState("user");
+  const [showSharePopup, setShowSharePopup] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef(null);
   const canvasRef = useRef(null);
   const videoRef = useRef(null);
@@ -174,6 +176,7 @@ export default function CapturePage() {
       const canvas = await composite(photo, selectedFrame, userName);
       canvasRef.current = canvas;
       setResultUrl(canvas.toDataURL("image/png"));
+      setShowSharePopup(true);
     } catch (err) {
       console.error("Compositing failed:", err);
       showToast("Something went wrong. Try a different photo.");
@@ -194,6 +197,7 @@ export default function CapturePage() {
             const canvas = await composite(photo, key, userName);
             canvasRef.current = canvas;
             setResultUrl(canvas.toDataURL("image/png"));
+            setShowSharePopup(true);
           } catch {
             showToast("Failed to generate. Please try again.");
           } finally {
@@ -568,6 +572,69 @@ export default function CapturePage() {
                 aria-label="Switch camera"
               >
                 <SwitchCamera size={22} />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Share Publicly popup */}
+      {showSharePopup && (
+        <div className={styles.popupOverlay} onClick={() => setShowSharePopup(false)}>
+          <div className={styles.popupCard} onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className={styles.popupClose}
+              onClick={() => setShowSharePopup(false)}
+              aria-label="Close"
+            >
+              <X size={20} />
+            </button>
+            <div className={styles.popupIcon}>
+              <Globe size={28} strokeWidth={1.5} />
+            </div>
+            <h3 className={styles.popupTitle}>Share to Gallery?</h3>
+            <p className={styles.popupDesc}>
+              Your framed photo will appear in the public Odyssey gallery for everyone to see.
+            </p>
+            <div className={styles.popupActions}>
+              <button
+                type="button"
+                className={`${styles.popupBtn} ${styles.popupBtnPrimary}`}
+                disabled={uploading}
+                onClick={async () => {
+                  setUploading(true);
+                  try {
+                    const res = await fetch("/api/gallery", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        image: resultUrl,
+                        name: userName || "Anonymous",
+                        frame: selectedFrame,
+                      }),
+                    });
+                    if (res.ok) {
+                      showToast("Shared to gallery!");
+                    } else {
+                      showToast("Upload failed. Try again.");
+                    }
+                  } catch {
+                    showToast("Could not upload. Check your connection.");
+                  } finally {
+                    setUploading(false);
+                    setShowSharePopup(false);
+                  }
+                }}
+              >
+                {uploading ? "Uploading…" : "Share Publicly"}
+              </button>
+              <button
+                type="button"
+                className={`${styles.popupBtn} ${styles.popupBtnSecondary}`}
+                onClick={() => setShowSharePopup(false)}
+              >
+                No Thanks
               </button>
             </div>
           </div>
